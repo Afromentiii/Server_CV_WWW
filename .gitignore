@@ -1,0 +1,12 @@
+# Foldery tymczasowe .NET
+[Bb]in/
+[Oo]bj/
+
+# Ustawienia VS Code / Visual Studio
+.vs/
+.vscode/
+.idea/
+
+# Pliki tymczasowe systemu operacyjnego
+.DS_Store
+Thumbs.db
