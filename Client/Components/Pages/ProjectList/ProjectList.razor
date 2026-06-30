@@ -1,0 +1,57 @@
+@inject AppState State
+@inject List<ProjectModel> ProjectsList
+@implements IDisposable
+
+<div class="projects-container">
+    <div class="projects-list">
+        @foreach (var project in Projects)
+        {
+            <div class="project-card">
+                <div class="project-title-section">
+                    <h3>@(State.CurrentLanguage == "PL" ? project.TitlePL : project.TitleEN)</h3>
+                </div>
+
+                <div class="project-tech-section">
+                @foreach (var tech in project.Technologies)
+                {
+                    @if (iconToImgPath.TryGetValue(tech, out var iconPath))
+                    {
+                        <span class="tech-badge">
+                            <img src="@iconPath" alt="@tech" />
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="tech-badge">@tech</span>
+                    }
+                }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private Dictionary<string, string> iconToImgPath = new ()
+    {
+        ["Python"] = "images/icons/icons8-python.svg",
+        ["Unity"] = "images/icons/icons8-unity.svg",
+        ["Unreal"] = "images/icons/icons8-unreal-engine.svg",
+        ["Godot"] = "images/icons/icon_color.svg",
+        ["C#"] = "images/icons/icons8-c-sharp-logo.svg",
+        ["Colab"] = "images/icons/icons8-google-colab.svg",
+        ["C++"] = "images/icons/icons8-c.svg",
+        ["Java"] = "images/icons/icons8-java.svg",
+        [key: "Neo4j"] = "images/icons/neo4j.svg",
+        [key: ".NET"] = "images/icons/icons8-.net-framework.svg"
+
+    };
+
+    private List<ProjectModel> Projects => ProjectsList;
+
+    protected override void OnInitialized()
+    {
+        State.OnChange += StateHasChanged;
+    }
+    public void Dispose() => State.OnChange -= StateHasChanged;
+}

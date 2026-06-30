@@ -1,0 +1,53 @@
+[
+  {
+    "TitlePL": "Porównanie silników gier Unity, Godot, Unreal",
+    "TitleEN": "Comparison of Unity, Godot, and Unreal game engines",
+    "Technologies": ["Unity", "Godot", "Unreal", "C#", "GDScript", "Blueprints"]
+  },
+  {
+    "TitlePL": "Uczenie ze wzmacnianiem — gra platformowa 2D",
+    "TitleEN": "Reinforcement Learning — 2D Platformer Game",
+    "Technologies": ["Godot", "GDScript"]
+  },
+  {
+    "TitlePL": "Uczenie maszynowe — scrapowanie danych i predykcja meczy Dota 2",
+    "TitleEN": "Machine Learning — Data Scraping and Prediction of Dota 2 Matches",
+    "Technologies": ["Colab", "Python"]
+  },
+  {
+    "TitlePL": "Własny język dziedzinowy (DSL) kompilowany do C++",
+    "TitleEN": "Custom DSL transpiler to C++",
+    "Technologies": ["Python", "C++"]
+  },
+  {
+    "TitlePL": "Projekt zespołowy — rozproszony system quizowy",
+    "TitleEN": "Team Project — Distributed Quiz System",
+    "Technologies": ["Java", "Maven"]
+  },
+  {
+    "TitlePL": "Aplikacja filmowa z bazą grafową Neo4j",
+    "TitleEN": "Graph Database Movie Application using Neo4j",
+    "Technologies": ["C#", "Neo4j"]
+  },
+  {
+    "TitlePL": "Transmisja plików przez port szeregowy (COM) w C++",
+    "TitleEN": "File Transfer over Serial Port (COM) in C++",
+    "Technologies": ["C++"]
+  },
+  {
+    "TitlePL": "Przetwarzanie sygnałów dźwiękowych — rozpoznanie języka mówcy",
+    "TitleEN": "Audio Signal Analysis — Speaker Language Classification",
+    "Technologies": ["Colab", "Python"]
+  },
+  {
+    "TitlePL": "Zestawy zadań algorytmicznych w C++",
+    "TitleEN": "Algorithm Problem Sets in C++",
+    "Technologies": ["C++"]
+  },
+  {
+  "TitlePL": "Strona portfolio",
+  "TitleEN": "Portfolio website",
+  "Technologies": ["C#", ".NET"]
+ }
+ 
+]

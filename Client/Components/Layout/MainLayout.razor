@@ -1,23 +1,32 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
+@inject AppState State
+@implements IDisposable
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+<div class="page-wrapper">
+    <header class="header">
+<div class="lang-selector">
+    <div class="lang-btn @(State.CurrentLanguage == "PL" ? "active" : "")" 
+         @onclick='() => State.SetLanguage("PL")'>
+        <img src="images/flags/pl.svg" alt="PL" class="flag-img" /> 
     </div>
+         
+    <div class="lang-btn @(State.CurrentLanguage == "EN" ? "active" : "")" 
+         @onclick='() => State.SetLanguage("EN")'>
+        <img src="images/flags/us.svg" alt="EN" class="flag-img" />
+    </div>
+</div>
+    </header>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
+    <main class="content-area">
+        @Body
     </main>
+
+    <footer class="footer"></footer>
 </div>
 
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
+@code 
+{
+    protected override void OnInitialized() => State.OnChange += StateHasChanged;
+    
+    public void Dispose() => State.OnChange -= StateHasChanged;
+}

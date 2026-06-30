@@ -1,0 +1,123 @@
+/* --- KONTENER GŁÓWNY DLA WIDOKU PROJEKTÓW --- */
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; /* Kontenery będą wyśrodkowane i rozciągnięte maksymalnie do tej szerokości */
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/* NAGŁÓWEK LISTY PROJEKTÓW */
+.projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.projects-header h2 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 2rem;
+    color: #0f172a;
+    margin: 0;
+}
+
+/* PRZYCISK POWROTU */
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-family: sans-serif;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.back-btn:hover {
+    background: #f8fafc;
+    color: #3b82f6;
+    border-color: #3b82f6;
+    transform: translateX(-2px);
+}
+
+/* PIONOWA LISTA KONTENERÓW */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Odstępy między kolejnymi projektami */
+    width: 100%;
+}
+
+/* --- KONTENER PROJEKTU (ZGODNIE ZE SZKICEM) --- */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px; /* Łagodne zaokrąglenie całego bloku */
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efekt delikatnego uniesienia karty po najechaniu */
+.project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* GÓRNA SEKCJA: NAZWA PROJEKTU */
+.project-title-section {
+    padding: 20px 24px;
+    background-color: #ffffff;
+    /* Linia oddzielająca na dole nazwy (jak na Twoim rysunku) */
+    border-bottom: 1px solid #e2e8f0; 
+}
+
+.project-title-section h3 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1.3rem;
+    color: #1e293b;
+    margin: 0;
+    text-align: center;
+}
+
+/* DOLNA SEKCJA: TECHNOLOGIE */
+.project-tech-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #3c1269 0%, #184592 100%);
+}
+
+/* BADGE / EMBLEMATY TECHNOLOGII */
+.tech-badge {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-family: Arial;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: background-color 0.26s ease;
+    
+    text-align: center;
+    display: flex;
+    justify-content: center; /* poziomo */
+    align-items: center;   
+
+}
