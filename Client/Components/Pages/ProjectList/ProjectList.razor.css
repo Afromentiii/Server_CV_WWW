@@ -92,6 +92,10 @@
     color: #1e293b;
     margin: 0;
     text-align: center;
+
+    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
+    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    user-select: none;
 }
 
 /* DOLNA SEKCJA: TECHNOLOGIE */
@@ -119,5 +123,9 @@
     display: flex;
     justify-content: center; /* poziomo */
     align-items: center;   
+
+    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
+    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    user-select: none;
 
 }

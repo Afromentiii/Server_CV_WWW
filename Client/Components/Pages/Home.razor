@@ -4,7 +4,7 @@
 
 <div class="main-content-wrapper">
 
-    @if (!showProjects)
+    @if (!State.ShowProjects)
     {
         <div class="tile-grid">
             <div class="nav-tile">
@@ -14,7 +14,7 @@
                 <span>CV</span>
             </div>
 
-            <div class="nav-tile" @onclick="ToggleView">
+            <div class="nav-tile" @onclick="() => {State.ToggleProjects(); State.ToggleFilter();}">
                 <svg class="tile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                 </svg>
@@ -30,14 +30,7 @@
 </div>
 
 @code {
-    private bool showProjects = false;
-
-    private void ToggleView()
-    {
-        showProjects = !showProjects;
-    }
-
     protected override void OnInitialized() => State.OnChange += StateHasChanged;
-    
+
     public void Dispose() => State.OnChange -= StateHasChanged;
 }

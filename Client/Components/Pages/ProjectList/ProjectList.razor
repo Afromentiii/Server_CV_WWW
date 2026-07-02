@@ -4,7 +4,7 @@
 
 <div class="projects-container">
     <div class="projects-list">
-        @foreach (var project in Projects)
+        @foreach (var project in FilteredProjects)
         {
             <div class="project-card">
                 <div class="project-title-section">
@@ -28,6 +28,13 @@
                 </div>
             </div>
         }
+        
+        @if (!FilteredProjects.Any())
+        {
+            <div style="text-align:center; padding: 40px; color: #64748b;">
+                @(State.CurrentLanguage == "PL" ? "Brak projektów spełniających kryteria." : "No projects match the criteria.")
+            </div>
+        }
     </div>
 </div>
 
@@ -42,12 +49,24 @@
         ["Colab"] = "images/icons/icons8-google-colab.svg",
         ["C++"] = "images/icons/icons8-c.svg",
         ["Java"] = "images/icons/icons8-java.svg",
-        [key: "Neo4j"] = "images/icons/neo4j.svg",
-        [key: ".NET"] = "images/icons/icons8-.net-framework.svg"
-
+        ["Neo4j"] = "images/icons/neo4j.svg",
+        [".NET"] = "images/icons/icons8-.net-framework.svg",
+        ["Html5"] = "images/icons/icons8-html.svg",
+        ["Css"] = "images/icons/icons8-css.svg",
     };
 
-    private List<ProjectModel> Projects => ProjectsList;
+    private IEnumerable<ProjectModel> FilteredProjects
+    {
+        get
+        {
+            if (State.SelectedTechnologies == null || !State.SelectedTechnologies.Any())
+            {
+                return ProjectsList;
+            }
+            
+            return ProjectsList.Where(p => State.SelectedTechnologies.All(t => p.Technologies.Contains(t)));
+        }
+    }
 
     protected override void OnInitialized()
     {

@@ -27,7 +27,7 @@
   {
     "TitlePL": "Aplikacja filmowa z bazą grafową Neo4j",
     "TitleEN": "Graph Database Movie Application using Neo4j",
-    "Technologies": ["C#", "Neo4j"]
+    "Technologies": ["C#", "Neo4j", ".NET"]
   },
   {
     "TitlePL": "Transmisja plików przez port szeregowy (COM) w C++",
@@ -47,7 +47,7 @@
   {
   "TitlePL": "Strona portfolio",
   "TitleEN": "Portfolio website",
-  "Technologies": ["C#", ".NET"]
- }
+  "Technologies": ["C#", ".NET", "Html5", "Css"]
+  }
  
 ]

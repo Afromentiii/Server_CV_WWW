@@ -4,7 +4,38 @@
 
 <div class="page-wrapper">
     <header class="header">
+
+    @if (State.IsShowingFilter)
+    {
+    <div class="filter-sidebar-wrapper">
+        <div class="filter-sidebar">
+            <button class="filter-btn" @onclick="() => State.ToggleFilterMenu()">
+                <img src="@filterPath" alt="Filter" />
+            </button>
+        </div>
+
+        <div class="filter-dropdown-panel @(State.IsFilterMenuOpen ? "open" : "")">
+            <h4>@(State.CurrentLanguage == "PL" ? "Filtruj" : "Filter")</h4>
+            <div class="checkbox-container">
+                @foreach (var tech in AvailableTechnologies)
+                {
+                    <label class="checkbox-label">
+                        <input type="checkbox" 
+                               checked="@State.SelectedTechnologies.Contains(tech)" 
+                               @onchange="() => State.ToggleTechnology(tech)" />
+                        <span class="custom-checkbox"></span>
+                        @tech
+                    </label>
+                }
+            </div>
+        </div>
+    </div>
+    }
+
 <div class="lang-selector">
+    <NavLink href="/" class="home-btn" @onclick='() => State.GoHome()'>
+        <img src="images/icons/icons8-homepage.svg" alt="Home" class="home-logo" /> 
+    </NavLink>
     <div class="lang-btn @(State.CurrentLanguage == "PL" ? "active" : "")" 
          @onclick='() => State.SetLanguage("PL")'>
         <img src="images/flags/pl.svg" alt="PL" class="flag-img" /> 
@@ -27,6 +58,13 @@
 @code 
 {
     protected override void OnInitialized() => State.OnChange += StateHasChanged;
+    private string filterPath = "images/icons/filter.svg";
+
+    private List<string> AvailableTechnologies = new() 
+    { 
+        "Python", "Unity", "Unreal", "Godot", "C#", "Colab", "C++", "Java", "Neo4j", ".NET", "Html5", "Css" 
+    };
     
     public void Dispose() => State.OnChange -= StateHasChanged;
 }
+

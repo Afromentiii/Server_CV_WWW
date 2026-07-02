@@ -19,6 +19,40 @@
     top: 10px;       /* 10px od góry ekranu */
     right: 20px;     /* 20px od prawej krawędzi ekranu */
     z-index: 999;
+
+    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
+    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    user-select: none;
+}
+
+.home-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;         /* Dopasuj wymiary do swoich potrzeb */
+    height: 30px;        
+    cursor: pointer;
+    transition: transform 0.15s ease-in-out;
+    margin-right: 4px;   /* Dodatkowy, delikatny odstęp oddzielający logo od flag */
+
+    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
+    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    user-select: none;
+}
+
+.home-btn:hover {
+    transform: scale(11.05); /* Delikatne powiększenie po najechaniu myszką */
+}
+
+.lang-selector .home-btn:active {
+    transform: scale(0.95); /* Efekt kliknięcia */
+}
+
+.home-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Gwarantuje, że logo nie zostanie nienaturalnie rozciągnięte */
+    
 }
 
 .lang-btn {
@@ -91,3 +125,129 @@
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
 }
 
+
+/* --- PŁYWAJĄCA IKONA FILTRA (PO LEWEJ STRONIE) --- */
+.filter-sidebar {
+    position: fixed;
+    left: 15px;
+    margin-top: 1px;          /* Odległość od lewej krawędzi ekranu */           /* Wyśrodkowanie w pionie */
+    transform: translateY(-50%);
+    z-index: 100;        /* Wyższy z-index, aby ikona była zawsze na wierzchu */
+
+    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
+    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    user-select: none;
+}
+
+.filter-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;  /* Kołowy kształt (możesz zmienić na 12px dla zaokrąglonego kwadratu) */
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-btn:hover {
+    background: #f8fafc;
+    border-color: #3b82f6;
+    transform: scale(1.05); /* Delikatne powiększenie przy najechaniu */
+}
+
+.filter-btn img {
+    width: 24px;         /* Dopasuj rozmiar swojej ikony */
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Responsywność: Gdy ekran jest bardzo mały, przenosimy filtr np. w inne miejsce, żeby nie zasłaniał treści */
+@media (max-width: 1024px) {
+    .filter-sidebar {
+        left: 15px;      /* Zmniejszamy margines na mniejszych ekranach */
+    }
+}
+
+/* Wrapper grupujący przycisk oraz rozwijane menu */
+.filter-sidebar-wrapper {
+    position: fixed;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    z-index: 100;
+}
+
+/* Poprawka Twojej klasy (usunięte błędne marginesy i transformaty kolidujące z nowym układem) */
+.filter-sidebar {
+    user-select: none;
+}
+
+/* ANIMOWANY PROSTOKĄT (PANEL Z CHECKBOXAMI) */
+.filter-dropdown-panel {
+    margin-top: 25px;        
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px; /* Zaokrąglone krawędzie */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 0px;
+    max-width: 0px;    /* Startowa szerokość dla animacji */
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.35s ease-in-out, opacity 0.25s ease, padding 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Klasa aktywowana przez Blazora po kliknięciu ikonki */
+.filter-dropdown-panel.open {
+    padding: 16px;
+    max-width: 260px; /* Docelowa szerokość prostokąta */
+    opacity: 1;
+}
+
+.filter-dropdown-panel h4 {
+    margin: 0 0 12px 0;
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-family: sans-serif;
+    font-weight: 600;
+    border-bottom: 2px solid #520897;
+    padding-bottom: 6px;
+}
+
+/* Układ checkboxów */
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto; /* Przewijanie wewnętrzne jeśli technologii będzie za dużo */
+    padding-right: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #475569;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.checkbox-label:hover {
+    color: #3b82f6;
+}
+
+/* Opcjonalny tuning wyglądu standardowego checkboxa */
+.checkbox-label input {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #520897; /* Kolor zaznaczenia pasujący do reszty designu */
+}

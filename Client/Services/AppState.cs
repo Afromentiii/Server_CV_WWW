@@ -23,4 +23,47 @@ public class AppState
     {
         this.CurrentLanguage = lang; 
     }
+
+    public bool ShowProjects { get; private set; } = false;
+    public bool IsShowingFilter { get; private set; } = false;
+    public bool IsFilterMenuOpen { get; set; } = false;
+    public List<string> SelectedTechnologies { get; private set; } = new();
+
+    public void ToggleProjects()
+    {
+        ShowProjects = !ShowProjects;
+        OnChange?.Invoke();
+    }
+
+    public void GoHome()
+    {
+        ShowProjects = false;
+        IsShowingFilter = false;
+        OnChange?.Invoke();
+    }
+
+    public void ToggleFilter()
+    {
+        IsShowingFilter = true;
+        OnChange?.Invoke();
+    }
+
+    public void ToggleFilterMenu()
+    {
+        IsFilterMenuOpen = !IsFilterMenuOpen;
+        NotifyStateChanged();
+    }
+
+    public void ToggleTechnology(string tech)
+    {
+        if (SelectedTechnologies.Contains(tech))
+        {
+            SelectedTechnologies.Remove(tech);
+        }
+        else
+        {
+            SelectedTechnologies.Add(tech);
+        }
+        NotifyStateChanged(); 
+    }
 }
