@@ -1,0 +1,12 @@
+@inject AppState State
+
+<div class="main-content-wrapper">
+
+    <h2>@(State.CurrentLanguage == "PL" ? currentProject?.TitlePL : currentProject?.TitleEN)</h2>
+
+</div>
+
+@code{
+    [Parameter] 
+    public ProjectModel currentProject { get; set; } = default!;
+}

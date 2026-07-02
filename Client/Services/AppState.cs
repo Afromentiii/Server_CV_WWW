@@ -1,6 +1,12 @@
 public class AppState
 {
     private string _currentLanguage = "PL";
+    public bool ShowProjects { get; private set; } = false;
+    public bool IsShowingFilter { get;  set; } = false;
+    public bool IsFilterMenuOpen { get; set; } = false;
+    public List<string> SelectedTechnologies { get; private set; } = new();
+    public event Action? OnChange;
+
 
     public string CurrentLanguage
     {
@@ -14,9 +20,6 @@ public class AppState
             }
         }
     }
-
-    public event Action? OnChange;
-
     private void NotifyStateChanged() => OnChange?.Invoke();
 
     public void SetLanguage(string lang)
@@ -24,28 +27,28 @@ public class AppState
         this.CurrentLanguage = lang; 
     }
 
-    public bool ShowProjects { get; private set; } = false;
-    public bool IsShowingFilter { get; private set; } = false;
-    public bool IsFilterMenuOpen { get; set; } = false;
-    public List<string> SelectedTechnologies { get; private set; } = new();
-
     public void ToggleProjects()
     {
         ShowProjects = !ShowProjects;
-        OnChange?.Invoke();
+        NotifyStateChanged();
     }
 
+    public void TurnOffFilter()
+    {
+        IsShowingFilter = false;
+        IsFilterMenuOpen = false;
+        NotifyStateChanged();
+    }
     public void GoHome()
     {
         ShowProjects = false;
-        IsShowingFilter = false;
-        OnChange?.Invoke();
+        TurnOffFilter();
     }
 
     public void ToggleFilter()
     {
         IsShowingFilter = true;
-        OnChange?.Invoke();
+        NotifyStateChanged();
     }
 
     public void ToggleFilterMenu()

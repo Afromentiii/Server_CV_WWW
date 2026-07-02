@@ -1,0 +1,16 @@
+@page "/projects/enginecompare"
+@inject AppState State
+@inject List<ProjectModel> ProjectsList
+@implements IDisposable
+
+
+<SharedLayout currentProject=ProjectsList.ElementAt(0) />
+
+@code {
+    protected override void OnInitialized()
+    {
+        State.TurnOffFilter();
+        State.OnChange += StateHasChanged;
+    }
+    public void Dispose() => State.OnChange -= StateHasChanged;    
+}

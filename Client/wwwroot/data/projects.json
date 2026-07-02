@@ -2,52 +2,63 @@
   {
     "TitlePL": "Porównanie silników gier Unity, Godot, Unreal",
     "TitleEN": "Comparison of Unity, Godot, and Unreal game engines",
-    "Technologies": ["Unity", "Godot", "Unreal", "C#", "GDScript", "Blueprints"]
+    "Technologies": ["Unity", "Godot", "Unreal", "C#", "GDScript", "Blueprints"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Uczenie ze wzmacnianiem — gra platformowa 2D",
     "TitleEN": "Reinforcement Learning — 2D Platformer Game",
-    "Technologies": ["Godot", "GDScript"]
+    "Technologies": ["Godot", "GDScript"],
+    "Page": "/projects/enginecompare"
+
   },
   {
     "TitlePL": "Uczenie maszynowe — scrapowanie danych i predykcja meczy Dota 2",
     "TitleEN": "Machine Learning — Data Scraping and Prediction of Dota 2 Matches",
-    "Technologies": ["Colab", "Python"]
+    "Technologies": ["Colab", "Python"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Własny język dziedzinowy (DSL) kompilowany do C++",
     "TitleEN": "Custom DSL transpiler to C++",
-    "Technologies": ["Python", "C++"]
+    "Technologies": ["Python", "C++"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Projekt zespołowy — rozproszony system quizowy",
     "TitleEN": "Team Project — Distributed Quiz System",
-    "Technologies": ["Java", "Maven"]
+    "Technologies": ["Java", "Maven"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Aplikacja filmowa z bazą grafową Neo4j",
     "TitleEN": "Graph Database Movie Application using Neo4j",
-    "Technologies": ["C#", "Neo4j", ".NET"]
+    "Technologies": ["C#", "Neo4j", ".NET"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Transmisja plików przez port szeregowy (COM) w C++",
     "TitleEN": "File Transfer over Serial Port (COM) in C++",
-    "Technologies": ["C++"]
+    "Technologies": ["C++"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Przetwarzanie sygnałów dźwiękowych — rozpoznanie języka mówcy",
     "TitleEN": "Audio Signal Analysis — Speaker Language Classification",
-    "Technologies": ["Colab", "Python"]
+    "Technologies": ["Colab", "Python"],
+    "Page": "/projects/enginecompare"
   },
   {
     "TitlePL": "Zestawy zadań algorytmicznych w C++",
     "TitleEN": "Algorithm Problem Sets in C++",
-    "Technologies": ["C++"]
+    "Technologies": ["C++"],
+    "Page": "/projects/enginecompare"
   },
   {
   "TitlePL": "Strona portfolio",
   "TitleEN": "Portfolio website",
-  "Technologies": ["C#", ".NET", "Html5", "Css"]
+  "Technologies": ["C#", ".NET", "Html5", "Css"],
+  "Page": "/projects/enginecompare"
   }
  
 ]

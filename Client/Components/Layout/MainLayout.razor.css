@@ -152,10 +152,15 @@
     justify-content: center;
 }
 
-.filter-btn:hover {
-    background: #f8fafc;
-    border-color: #3b82f6;
-    transform: scale(1.05); /* Delikatne powiększenie przy najechaniu */
+@media (hover: hover) {
+    .filter-btn:hover {
+        background: #f8fafc;
+        border-color: #3b82f6;
+        transform: scale(1.05);
+    }
+    .lang-btn:hover {
+        border-color: #000000;
+    }
 }
 
 .filter-btn img {
