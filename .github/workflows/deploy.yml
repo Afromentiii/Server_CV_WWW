@@ -22,6 +22,15 @@ jobs:
       working-directory: Client
       run: dotnet publish -c Release -o ../release_output
 
+    - name: Stop Systemd Service
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_IP }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          sudo systemctl stop cv-project.service
+
     - name: Deploy to VPS
       uses: easingthemes/ssh-deploy@main
       with:
@@ -32,7 +41,7 @@ jobs:
         REMOTE_USER: ${{ secrets.VPS_USER }}
         TARGET: "/home/debian/CV_project/dist/"
 
-    - name: Restart Systemd Service
+    - name: Start Systemd Service
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.VPS_IP }}
@@ -40,6 +49,5 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           sudo systemctl daemon-reload
-          sudo systemctl restart cv-project.service
+          sudo systemctl start cv-project.service
           sudo systemctl status cv-project.service --no-pager
-

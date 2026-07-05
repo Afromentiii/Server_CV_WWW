@@ -1,12 +1,34 @@
 @inject AppState State
 
-<div class="main-content-wrapper">
+<div style="display:block; width:100%; align-self: flex-start;">
+    <div class="wavy-container">
+        <h2 class="wavy-title">
+            @(State.CurrentLanguage == "PL" ? currentProject?.TitlePL : currentProject?.TitleEN)
+        </h2>
+    </div>
 
-    <h2>@(State.CurrentLanguage == "PL" ? currentProject?.TitlePL : currentProject?.TitleEN)</h2>
-
+    <div class="tech-card @(shouldAnimate ? "animate-card" : "hide-card")">
+        <h3 class="tech-card-title">
+            @(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective")
+        </h3>
+        <div class="tech-card-body">
+            <p>@((MarkupString)(State.CurrentLanguage == "PL" ? currentProject?.ProjectGoalPL : currentProject?.ProjectGoalEN))</p>
+        </div>
+    </div>
 </div>
 
-@code{
+@code {
     [Parameter] 
     public ProjectModel currentProject { get; set; } = default!;
+
+    private bool shouldAnimate = false;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            shouldAnimate = true;
+            StateHasChanged();
+        }
+    }
 }

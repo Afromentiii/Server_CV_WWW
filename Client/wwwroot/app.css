@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap');
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -64,4 +65,41 @@ h1:focus {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
+}
+
+
+/* Klasa bazowa, którą możesz dopisać do DOWOLNEGO diva */
+.wavy-container {
+    position: relative;
+    width: 100%;
+    /* Upiększenie: Głęboki, elegancki, nowoczesny gradient dark-mode */
+    background: linear-gradient(135deg, #3c1269 0%, #184592 100%);
+    padding: 60px 20px; /* Przestrzeń w pionie, żeby tekst nie dotykał fal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+/* Stylizacja tekstu wewnątrz fali */
+.wavy-title {
+    font-family: 'Anonymous Pro', Courier, monospace;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: #f9fafb;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0;
+    text-shadow: 0 4px 32px rgb(0, 0, 0);
+    text-align: center;
+}
+
+/* Responsywność dla mniejszych ekranów */
+@media (max-width: 768px) {
+    .wavy-container {
+        padding: 45px 15px;
+    }
+    .wavy-title {
+        font-size: 1.85rem;
+        letter-spacing: 0.08em;
+    }
 }
