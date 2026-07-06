@@ -1,18 +1,28 @@
 @inject AppState State
+@inject IJSRuntime JS
 
 <div style="display:block; width:100%; align-self: flex-start;">
     <div class="wavy-container">
-        <h2 class="wavy-title">
+        <h2 class="wavy-title title-hidden" id="main-title">
             @(State.CurrentLanguage == "PL" ? currentProject?.TitlePL : currentProject?.TitleEN)
         </h2>
     </div>
 
-    <div class="tech-card @(shouldAnimate ? "animate-card" : "hide-card")">
+    <div class="tech-card hide-card">
+        <h3 class="tech-card-title">
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective"))
+        </h3>
+        <div class="tech-card-body">
+            <p>@((MarkupString)(State.CurrentLanguage == "PL" ? currentProject?.ProjectGoalPL ?? "" : currentProject?.ProjectGoalEN ?? ""))</p>
+        </div>
+    </div>
+
+    <div class="tech-card hide-card">
         <h3 class="tech-card-title">
             @(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective")
         </h3>
         <div class="tech-card-body">
-            <p>@((MarkupString)(State.CurrentLanguage == "PL" ? currentProject?.ProjectGoalPL : currentProject?.ProjectGoalEN))</p>
+            <p>@((MarkupString)(State.CurrentLanguage == "PL" ? currentProject?.ProjectGoalPL ?? "" : currentProject?.ProjectGoalEN ?? ""))</p>
         </div>
     </div>
 </div>
@@ -21,14 +31,12 @@
     [Parameter] 
     public ProjectModel currentProject { get; set; } = default!;
 
-    private bool shouldAnimate = false;
-
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            shouldAnimate = true;
-            StateHasChanged();
+            await JS.InvokeVoidAsync("observeElements", ".tech-card", 0.01);
+            await JS.InvokeVoidAsync("animateTitle", "#main-title");
         }
     }
 }

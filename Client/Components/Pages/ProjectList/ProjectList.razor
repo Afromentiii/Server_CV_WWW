@@ -1,6 +1,6 @@
 @inject AppState State
 @inject NavigationManager Navigation
-@inject List<ProjectModel> ProjectsList
+@inject IProjectService ProjectService
 @implements IDisposable
 
 <div class="projects-container">
@@ -60,12 +60,13 @@
     {
         get
         {
+            var projects = ProjectService.GetProjects();
             if (State.SelectedTechnologies == null || !State.SelectedTechnologies.Any())
             {
-                return ProjectsList;
+                return projects;
             }
             
-            return ProjectsList.Where(p => State.SelectedTechnologies.All(t => p.Technologies.Contains(t)));
+            return projects.Where(p => State.SelectedTechnologies.All(t => p.Technologies.Contains(t)));
         }
     }
 

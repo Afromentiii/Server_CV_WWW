@@ -1,10 +1,10 @@
 @page "/projects/enginecompare"
 @inject AppState State
-@inject List<ProjectModel> ProjectsList
+@inject IProjectService ProjectService
 @implements IDisposable
 
 
-<SharedLayout currentProject=ProjectsList.ElementAt(0) />
+<SharedLayout currentProject=ProjectService.GetProjects().ElementAt(0) />
 
 @code {
     protected override void OnInitialized()

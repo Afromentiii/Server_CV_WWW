@@ -2,16 +2,19 @@
    1. DEFINICJA ANIMACJI WEJŚCIA
    ========================================== */
 @keyframes cardFadeIn {
-    from {
+    0% {
         opacity: 0;
-        transform: translateY(55px);
-        box-shadow: 0 0 0 rgba(17, 22, 34, 0);
+        transform: perspective(1200px) translateY(80px) scale(0.94) rotateX(-4deg);
+        filter: blur(12px);
+        box-shadow: 0 4px 10px rgba(19, 0, 63, 0);
     }
-    to {
+
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: perspective(1200px) translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
         /* Twój fioletowo-neonowy cień po zakończeniu animacji */
-        box-shadow: 0 12px 32px rgb(19, 0, 63); 
+        box-shadow: 0 24px 40px rgba(19, 0, 63, 0.993), 0 0 24px rgba(24, 69, 146, 0.12);
     }
 }
 
@@ -23,28 +26,27 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    border-radius: 40px; /* Nieco mniejszy promień dla bardziej eleganckiego, książkowego formatu */
-    
+    border-radius: 40px;
+    /* Nieco mniejszy promień dla bardziej eleganckiego, książkowego formatu */
+
     /* IDEALNIE RÓWNE MARGINESY WEWNĘTRZNE (Góra/Dół: 45px, Boki: 50px) */
-    padding: 45px 50px; 
-    
+    padding: 45px 50px;
+
     margin: 40px auto;
     width: 92%;
-    max-width: 1000px; /* Nieco węższa karta, aby długość linii tekstu była idealna do czytania */
+    max-width: 1000px;
+    /* Nieco węższa karta, aby długość linii tekstu była idealna do czytania */
     box-sizing: border-box;
     border: 5px solid rgba(3, 5, 141, 0.548);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Subtelny efekt uniesienia po najechaniu myszką */
 .tech-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 40px rgba(17, 22, 34, 0.15); /* Lekko podbity cień, żeby hover był widoczny na jasnym tle */
+    transform: translateY(-8px) scale(1.008);
+    border-color: rgb(24, 69, 146);
+    box-shadow: 0 24px 48px rgba(19, 0, 63, 0.28), 0 0 32px rgba(3, 5, 141, 0.2);
 }
 
-/* ==========================================
-   3. NAGŁÓWEK I ANATOMIA WNĘTRZA
-   ========================================== */
 .tech-card-title {
     font-family: 'Anonymous Pro', Courier, monospace;
     font-size: 1.4rem;
@@ -68,24 +70,25 @@
 .tech-card-body p {
     font-family: Inter, Roboto, "Open Sans", "Lato", sans-serif;
     font-size: 1.05rem;
-    
+
     /* 1. JUSTOWANIE: Tekst rozciągnięty od marginesu do marginesu */
     text-align: justify;
-    text-justify: inter-word; /* Wymusza równe rozkładanie spacji między słowami */
-    
+    text-justify: inter-word;
+    /* Wymusza równe rozkładanie spacji między słowami */
+
     /* 2. INTERLINIA: Odpowiednik akademickiego 1.5 w druku */
-    line-height: 1.65; 
-    
+    line-height: 1.65;
+
     color: #111622;
     letter-spacing: 0.01em;
-    
+
     /* 3. WCIĘCIE AKAPITOWE: Klasyczny "tab" na początku każdego akapitu w LaTeX */
-    text-indent: 35px; 
-    
+    text-indent: 35px;
+
     /* 4. ODSTĘPY MIĘDZY AKAPITAMI: W LaTeXie strukturę budują wcięcia, 
        dlatego marginesy pionowe między akapitami zmniejszamy do minimum */
-    margin: 0 0 8px 0; 
-    
+    margin: 0 0 8px 0;
+
     /* 5. DZIELENIE WYRAZÓW: Absolutnie kluczowe przy justowaniu w j. polskim! 
        Zapobiega powstawaniu wielkich dziur w tekście. */
     hyphens: auto;
@@ -100,9 +103,11 @@
 
 /* Wyróżnienie wyłącznie pierwszego akapitu (wstęp) */
 .tech-card-body p:first-of-type {
-    font-size: 1.05rem; /* Taki sam rozmiar dla spójności bloku tekstu */
+    font-size: 1.05rem;
+    /* Taki sam rozmiar dla spójności bloku tekstu */
     font-weight: normal;
-    text-indent: 15px; /* Pozostawiamy wcięcie dla pełnego stylu LaTeX */
+    text-indent: 15px;
+    /* Pozostawiamy wcięcie dla pełnego stylu LaTeX */
 }
 
 /* Elementy pogrubione w tekście */
@@ -121,20 +126,33 @@
     transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.tech-card-body a:hover {
-    color: #0062ff;
-    border-bottom-color: #0f2d5e;
-}
-
 /* ==========================================
    6. KLASY KONTROLNE DLA REJESTRACJI BLOW/ANIMACJI
    ========================================== */
 /* Stan początkowy przed uruchomieniem kodu w Blazorze */
 .hide-card {
     opacity: 0;
+    filter: blur(8px);
 }
 
 /* Stan aktywowany za pomocą warunku shouldAnimate w OnAfterRender */
 .animate-card {
-    animation: cardFadeIn 2.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: cardFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Kaskadowe opóźnienia kart (Staggering) */
+.tech-card:nth-of-type(1) {
+    animation-delay: 0.1s;
+}
+
+.tech-card:nth-of-type(2) {
+    animation-delay: 0.35s;
+}
+
+.tech-card:nth-of-type(3) {
+    animation-delay: 0.6s;
+}
+
+.tech-card:nth-of-type(4) {
+    animation-delay: 0.85s;
 }
