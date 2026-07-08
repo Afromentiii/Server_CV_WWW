@@ -3,8 +3,29 @@
 @inject IProjectService ProjectService
 @implements IDisposable
 
+<SharedLayout currentProject=ProjectService.GetProjects().ElementAt(0)>
+    <TableOfContents>
+        <div class="toc-item" onclick="window.scrollToElement('custom-section')">
+            @(State.CurrentLanguage == "PL" ? "Nowa sekcja" : "New section")
+        </div>
+    </TableOfContents>
 
-<SharedLayout currentProject=ProjectService.GetProjects().ElementAt(0) />
+    <ChildContent>
+        <!-- PRZYKŁAD: Nowa karta (zostanie automatycznie zaanimowana) -->
+        <div class="tech-card hide-card" id="custom-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Nowa sekcja" : "New section")
+            </h3>
+            <div class="tech-card-body">
+                <p>
+                    @(State.CurrentLanguage == "PL" 
+                        ? "Tutaj możesz umieścić dodatkowe informacje, np. wyniki benchmarków, architekturę, itd." 
+                        : "Here you can place additional information, e.g. benchmark results, architecture, etc.")
+                </p>
+            </div>
+        </div>
+    </ChildContent>
+</SharedLayout>
 
 @code {
     protected override void OnInitialized()

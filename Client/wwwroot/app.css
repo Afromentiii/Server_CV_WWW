@@ -82,14 +82,14 @@ h1:focus {
 }
 /* Stylizacja tekstu wewnątrz fali */
 .wavy-title {
-    font-family: 'Anonymous Pro', Courier, monospace;
-    font-size: 2.75rem;
-    font-weight: 700;
-    color: #f9fafb;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 400; /* Archivo Black is inherently bold */
+    color: #ffffff;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.05em;
     margin: 0;
-    text-shadow: 0 4px 32px rgb(0, 0, 0);
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.15);
     text-align: center;
 }
 
@@ -124,4 +124,316 @@ h1:focus {
         transform: translateY(0) scale(1);
         filter: blur(0);
     }
+}
+
+/* --- Table of Contents Sidebar (matching Filter style) --- */
+.shared-layout-wrapper {
+    position: relative;
+    width: 100%;
+    align-self: flex-start;
+}
+
+.toc-sidebar-wrapper {
+    position: fixed;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    z-index: 100;
+    top: 24px; /* Force wrapper to the header's padding position */
+    left: 24px;
+}
+
+.toc-sidebar {
+    position: fixed;
+    left: 15px;
+    margin-top: 1px;          
+    transform: translateY(-50%);
+    z-index: 100;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.toc-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (hover: hover) {
+    .toc-btn:hover {
+        background: #f8fafc;
+        border-color: #3b82f6;
+        transform: scale(1.05);
+    }
+}
+
+.toc-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.toc-dropdown-panel {
+    margin-top: 25px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 0px;
+    max-width: 0px;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.35s ease-in-out, opacity 0.25s ease, padding 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.toc-dropdown-panel.open {
+    padding: 16px;
+    max-width: 260px;
+    opacity: 1;
+}
+
+.toc-dropdown-panel h4 {
+    margin: 0 0 12px 0;
+    font-size: 0.95rem;
+    color: #000000;
+    font-family: sans-serif;
+    font-weight: 600;
+    border-bottom: 2px solid #520897;
+    padding-bottom: 6px;
+}
+
+.toc-item {
+    position: relative;
+    color: #000000;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    user-select: none;
+    overflow: hidden;
+}
+
+.toc-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #184592;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    border-radius: 4px;
+}
+
+.toc-item:hover::before {
+    transform: scaleY(1);
+}
+
+.toc-item:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+    padding-left: 18px;
+}
+
+/* ==========================================
+   1. DEFINICJA ANIMACJI WEJŚCIA
+   ========================================== */
+@keyframes cardFadeIn {
+    0% {
+        opacity: 0;
+        transform: perspective(1200px) translateY(80px) scale(0.94) rotateX(-4deg);
+        filter: blur(12px);
+        box-shadow: 0 4px 10px rgba(19, 0, 63, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: perspective(1200px) translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+        box-shadow: 0 24px 40px rgba(19, 0, 63, 0.993), 0 0 24px rgba(24, 69, 146, 0.12);
+    }
+}
+
+/* ==========================================
+   2. GŁÓWNA STRUKTURA KARTY (.tech-card)
+   ========================================== */
+.tech-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 40px;
+    padding: 45px 50px;
+    margin: 40px auto;
+    width: 92%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    border: 5px solid rgba(3, 5, 141, 0.548);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-card:hover {
+    transform: translateY(-8px) scale(1.008);
+    border-color: rgb(24, 69, 146);
+    box-shadow: 0 24px 48px rgba(19, 0, 63, 0.28), 0 0 32px rgba(3, 5, 141, 0.2);
+}
+
+.tech-card-title {
+    font-family: 'Anonymous Pro', Courier, monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111622;
+    margin-top: 0;
+    display: block;
+    border-bottom: 2px solid #184592;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+}
+
+.tech-card-body {
+    display: block;
+}
+
+/* ==========================================
+   4. STYLIZACJA TEKSTU (POPRAWIONA)
+   ========================================== */
+.tech-card-body p {
+    font-family: Inter, Roboto, "Open Sans", "Lato", sans-serif;
+    font-size: 1.05rem;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.65;
+    color: #111622;
+    letter-spacing: 0.01em;
+    text-indent: 35px;
+    margin: 0 0 8px 0;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
+.tech-card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.tech-card-body p:first-of-type {
+    font-size: 1.05rem;
+    font-weight: normal;
+    text-indent: 15px;
+}
+
+.tech-card-body strong {
+    color: #111622;
+    font-weight: 600;
+}
+
+/* ==========================================
+   5. STYLIZACJA LINKÓW W TEKŚCIE
+   ========================================== */
+.tech-card-body a {
+    color: #184592;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(24, 69, 146, 0.3);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+/* ==========================================
+   6. KLASY KONTROLNE DLA REJESTRACJI BLOW/ANIMACJI
+   ========================================== */
+.hide-card {
+    opacity: 0;
+    filter: blur(8px);
+}
+
+.animate-card {
+    animation: cardFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.tech-card:nth-of-type(1) {
+    animation-delay: 0.1s;
+}
+
+.tech-card:nth-of-type(2) {
+    animation-delay: 0.35s;
+}
+
+.tech-card:nth-of-type(3) {
+    animation-delay: 0.6s;
+}
+
+.tech-card:nth-of-type(4) {
+    animation-delay: 0.85s;
+}
+
+/* ==========================================
+   7. BADGE TECHNOLOGII (.shared-tech-badge)
+   ========================================== */
+.shared-tech-badge {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #111622;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.shared-tech-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.shared-tech-badge img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* ==========================================
+   8. PRZEŁĄCZNIK WERSJI (.version-toggle-btn)
+   ========================================== */
+.version-toggle-btn {
+    background: transparent;
+    border: 2px solid #184592;
+    color: #000000;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-family: 'Anonymous Pro', Courier, monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.version-toggle-btn:hover {
+    background: #184592;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(24, 69, 146, 0.2);
+    transform: translateY(-1px);
 }

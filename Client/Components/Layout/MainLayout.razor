@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject AppState State
+@inject IJSRuntime JS
 @implements IDisposable
 
 <div class="page-wrapper">
@@ -37,12 +38,12 @@
         <img src="images/icons/icons8-homepage.svg" alt="Home" class="home-logo" /> 
     </NavLink>
     <div class="lang-btn @(State.CurrentLanguage == "PL" ? "active" : "")" 
-         @onclick='() => State.SetLanguage("PL")'>
+         @onclick='() => ChangeLanguage("PL")'>
         <img src="images/flags/pl.svg" alt="PL" class="flag-img" /> 
     </div>
          
     <div class="lang-btn @(State.CurrentLanguage == "EN" ? "active" : "")" 
-         @onclick='() => State.SetLanguage("EN")'>
+         @onclick='() => ChangeLanguage("EN")'>
         <img src="images/flags/us.svg" alt="EN" class="flag-img" />
     </div>
 </div>
@@ -58,6 +59,24 @@
 @code 
 {
     protected override void OnInitialized() => State.OnChange += StateHasChanged;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var savedLang = await JS.InvokeAsync<string>("getLanguageCookie");
+            if (!string.IsNullOrEmpty(savedLang) && savedLang != State.CurrentLanguage)
+            {
+                State.SetLanguage(savedLang);
+            }
+        }
+    }
+
+    private async Task ChangeLanguage(string lang)
+    {
+        State.SetLanguage(lang);
+        await JS.InvokeVoidAsync("setLanguageCookie", lang);
+    }
     private string filterPath = "images/icons/filter.svg";
 
     private List<string> AvailableTechnologies = new() 

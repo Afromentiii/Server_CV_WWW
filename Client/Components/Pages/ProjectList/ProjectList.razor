@@ -15,7 +15,7 @@
                 <div class="project-tech-section">
                 @foreach (var tech in project.Technologies)
                 {
-                    @if (iconToImgPath.TryGetValue(tech, out var iconPath))
+                    @if (State.IconToImgPath.TryGetValue(tech, out var iconPath))
                     {
                         <span class="tech-badge">
                             <img src="@iconPath" alt="@tech" />
@@ -40,22 +40,6 @@
 </div>
 
 @code {
-    private Dictionary<string, string> iconToImgPath = new ()
-    {
-        ["Python"] = "images/icons/icons8-python.svg",
-        ["Unity"] = "images/icons/icons8-unity.svg",
-        ["Unreal"] = "images/icons/icons8-unreal-engine.svg",
-        ["Godot"] = "images/icons/icon_color.svg",
-        ["C#"] = "images/icons/icons8-c-sharp-logo.svg",
-        ["Colab"] = "images/icons/icons8-google-colab.svg",
-        ["C++"] = "images/icons/icons8-c.svg",
-        ["Java"] = "images/icons/icons8-java.svg",
-        ["Neo4j"] = "images/icons/neo4j.svg",
-        [".NET"] = "images/icons/icons8-.net-framework.svg",
-        ["Html5"] = "images/icons/icons8-html.svg",
-        ["Css"] = "images/icons/icons8-css.svg",
-    };
-
     private IEnumerable<ProjectModel> FilteredProjects
     {
         get

@@ -1,42 +1,135 @@
 @inject AppState State
 @inject IJSRuntime JS
 
-<div style="display:block; width:100%; align-self: flex-start;">
-    <div class="wavy-container">
-        <h2 class="wavy-title title-hidden" id="main-title">
-            @(State.CurrentLanguage == "PL" ? currentProject?.TitlePL : currentProject?.TitleEN)
-        </h2>
-    </div>
-
-    <div class="tech-card hide-card">
-        <h3 class="tech-card-title">
-            @((MarkupString)(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective"))
-        </h3>
-        <div class="tech-card-body">
-            <p>@((MarkupString)(State.CurrentLanguage == "PL" ? currentProject?.ProjectGoalPL ?? "" : currentProject?.ProjectGoalEN ?? ""))</p>
+<div class="shared-layout-wrapper">
+    @if (TableOfContents != null)
+    {
+        <!-- TOC Sidebar / Fixed Button -->
+        <div class="toc-sidebar-wrapper">
+            <div class="toc-sidebar">
+                <button class="toc-btn" @onclick="ToggleToc" title="@(State.CurrentLanguage == "PL" ? "Spis treści" : "Table of contents")">
+                    <img src="images/icons/table-content.svg" alt="Table of Contents" />
+                </button>
+            </div>
+            <div class="toc-dropdown-panel @(IsTocOpen ? "open" : "")" @onclick="CloseToc">
+                <h4 class="toc-menu-title">@(State.CurrentLanguage == "PL" ? "Spis treści" : "Table of contents")</h4>
+                <div class="toc-item" onclick="window.scrollToElement('project-objective')">
+                    @(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective")
+                </div>
+                <div class="toc-item" onclick="window.scrollToElement('technologies')">
+                    @(State.CurrentLanguage == "PL" ? "Technologie" : "Technologies")
+                </div>
+                @TableOfContents
+            </div>
         </div>
-    </div>
+    }
 
-    <div class="tech-card hide-card">
-        <h3 class="tech-card-title">
-            @(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective")
-        </h3>
-        <div class="tech-card-body">
-            <p>@((MarkupString)(State.CurrentLanguage == "PL" ? currentProject?.ProjectGoalPL ?? "" : currentProject?.ProjectGoalEN ?? ""))</p>
+    <div style="display:block; width:100%;">
+        <div class="wavy-container">
+            <h2 class="wavy-title @TitleClass" id="main-title">
+                @(State.CurrentLanguage == "PL" ? currentProject?.TitlePL : currentProject?.TitleEN)
+            </h2>
         </div>
+
+        <div class="tech-card hide-card" id="project-objective">
+            <h3 class="tech-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>@((MarkupString)(State.CurrentLanguage == "PL" ? "Cel projektu" : "Project objective"))</span>
+                @if (HasShortDescription)
+                {
+                    <button @onclick="ToggleDescription" class="version-toggle-btn">
+                        @(ShowLongDescription ? (State.CurrentLanguage == "PL" ? "Wersja: Pełna" : "Version: Full") : (State.CurrentLanguage == "PL" ? "Wersja: Skrócona" : "Version: Short"))
+                    </button>
+                }
+            </h3>
+            <div class="tech-card-body">
+                <p>@((MarkupString)GetCurrentDescription())</p>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="technologies">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Technologie" : "Technologies")
+            </h3>
+            <div class="tech-card-body">
+                @ShowTechnologiesList()
+            </div>
+        </div>
+
+        @ChildContent
     </div>
 </div>
 
 @code {
-    [Parameter] 
-    public ProjectModel currentProject { get; set; } = default!;
+    [Parameter] public ProjectModel currentProject { get; set; } = default!;
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? TableOfContents { get; set; }
+
+    private bool IsTocOpen = false;
+    private string TitleClass = "title-hidden";
+    private bool ShowLongDescription = true;
+
+    private bool HasShortDescription => 
+        State.CurrentLanguage == "PL" ? !string.IsNullOrWhiteSpace(currentProject?.ProjectGoalShortPL) : !string.IsNullOrWhiteSpace(currentProject?.ProjectGoalShortEN);
+
+    private void ToggleDescription()
+    {
+        ShowLongDescription = !ShowLongDescription;
+    }
+
+    private string GetCurrentDescription()
+    {
+        if (State.CurrentLanguage == "PL")
+        {
+            if (!HasShortDescription) return currentProject?.ProjectGoalPL ?? "";
+            return ShowLongDescription ? currentProject?.ProjectGoalPL ?? "" : currentProject?.ProjectGoalShortPL ?? "";
+        }
+        else
+        {
+            if (!HasShortDescription) return currentProject?.ProjectGoalEN ?? "";
+            return ShowLongDescription ? currentProject?.ProjectGoalEN ?? "" : currentProject?.ProjectGoalShortEN ?? "";
+        }
+    }
+
+    private void ToggleToc()
+    {
+        IsTocOpen = !IsTocOpen;
+    }
+
+    private void CloseToc()
+    {
+        IsTocOpen = false;
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await JS.InvokeVoidAsync("observeElements", ".tech-card", 0.01);
-            await JS.InvokeVoidAsync("animateTitle", "#main-title");
+            
+            TitleClass = "title-animate";
+            StateHasChanged();
         }
     }
+
+    private RenderFragment ShowTechnologiesList() => __builder =>
+    {
+        if (currentProject?.Technologies != null)
+        {
+            <div class="technologies-list" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+                @foreach (var tech in currentProject.Technologies)
+                {
+                    if (State.IconToImgPath.TryGetValue(tech, out var iconPath))
+                    {
+                        <div class="shared-tech-badge" title="@tech">
+                            <img src="@iconPath" alt="@tech" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="shared-tech-badge">@tech</div>
+                    }
+                }
+            </div>
+        }
+    };
 }
