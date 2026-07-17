@@ -1,0 +1,23 @@
+@page "/projects/serialport"
+@inject AppState State
+@inject IProjectService ProjectService
+@implements IDisposable
+
+<SharedLayout currentProject=ProjectService.GetProjects().ElementAt(6)>
+    <TableOfContents>
+        <!-- Dodaj elementy spisu treści tutaj (np. linki do sekcji) -->
+    </TableOfContents>
+
+    <ChildContent>
+        <!-- Dodaj treść strony tutaj (np. karty z opisami, wideo itp.) -->
+    </ChildContent>
+</SharedLayout>
+
+@code {
+    protected override void OnInitialized()
+    {
+        State.TurnOffFilter();
+        State.OnChange += StateHasChanged;
+    }
+    public void Dispose() => State.OnChange -= StateHasChanged;    
+}

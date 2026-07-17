@@ -5,23 +5,51 @@
 
 <SharedLayout currentProject=ProjectService.GetProjects().ElementAt(0)>
     <TableOfContents>
-        <div class="toc-item" onclick="window.scrollToElement('custom-section')">
-            @(State.CurrentLanguage == "PL" ? "Nowa sekcja" : "New section")
+        <div class="toc-item" onclick="window.scrollToElement('movie-section')">
+            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Aquarium)" : "Video Showcase (Aquarium)")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('movie-section-fox')">
+            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Fox)" : "Video Showcase (Fox)")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('movie-section-map')">
+            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Map)" : "Video Showcase (Map)")
         </div>
     </TableOfContents>
 
     <ChildContent>
-        <!-- PRZYKŁAD: Nowa karta (zostanie automatycznie zaanimowana) -->
-        <div class="tech-card hide-card" id="custom-section">
+        <div class="tech-card hide-card" id="movie-section">
             <h3 class="tech-card-title">
-                @(State.CurrentLanguage == "PL" ? "Nowa sekcja" : "New section")
+                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Aquarium)" : "Video Showcase (Aquarium)")
             </h3>
-            <div class="tech-card-body">
-                <p>
-                    @(State.CurrentLanguage == "PL" 
-                        ? "Tutaj możesz umieścić dodatkowe informacje, np. wyniki benchmarków, architekturę, itd." 
-                        : "Here you can place additional information, e.g. benchmark results, architecture, etc.")
-                </p>
+            <div class="tech-card-body" style="text-align: center;">
+                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <source src="/images/movies/aquarium.webm" type="video/webm" />
+                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                </video>
+            </div>
+        </div>
+        
+        <div class="tech-card hide-card" id="movie-section-fox">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Fox)" : "Video Showcase (Fox)")
+            </h3>
+            <div class="tech-card-body" style="text-align: center;">
+                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <source src="/images/movies/fox_compare.webm" type="video/webm" />
+                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                </video>
+            </div>
+        </div>
+        
+        <div class="tech-card hide-card" id="movie-section-map">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Map)" : "Video Showcase (Map)")
+            </h3>
+            <div class="tech-card-body" style="text-align: center;">
+                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <source src="/images/movies/map_compare.webm" type="video/webm" />
+                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                </video>
             </div>
         </div>
     </ChildContent>

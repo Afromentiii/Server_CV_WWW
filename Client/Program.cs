@@ -3,7 +3,7 @@ using Client.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Rejestracja usług
+// Rejestracja usługd
 builder.Services.AddSingleton<IProjectService, ProjectService>();
 builder.Services.AddScoped<AppState>();
 

@@ -12,14 +12,17 @@
   {
     "TitlePL": "Uczenie ze wzmacnianiem — gra platformowa 2D",
     "TitleEN": "Reinforcement Learning — 2D Platformer Game",
-    "Technologies": ["Godot", "GDScript"],
-    "Page": "/projects/enginecompare"
-
+    "Technologies": ["Godot", "GDScript", "Machine Learning"],
+    "Page": "/projects/rml",
+    "ProjectGoalPL": "Celem projektu było stworzenie autonomicznego agenta potrafiącego pokonywać przeszkody w grze platformowej 2D przy użyciu technik uczenia ze wzmacnianiem. Algorytm na bieżąco analizuje stan środowiska i dostosowuje swoje zachowanie w celu maksymalizacji nagrody, ucząc się optymalnych ścieżek i unikania zagrożeń.",
+    "ProjectGoalShortPL": "Stworzenie agenta SI uczącego się przechodzenia gry platformowej 2D za pomocą algorytmów uczenia ze wzmacnianiem.",
+    "ProjectGoalEN": "The goal of the project was to create an autonomous agent capable of overcoming obstacles in a 2D platformer game using reinforcement learning techniques. The algorithm continuously analyzes the state of the environment and adapts its behavior to maximize the reward, learning optimal paths and avoiding threats.",
+    "ProjectGoalShortEN": "Creating an AI agent that learns to navigate a 2D platformer game using reinforcement learning algorithms."
   },
   {
     "TitlePL": "Uczenie maszynowe — scrapowanie danych i predykcja meczy Dota 2",
     "TitleEN": "Machine Learning — Data Scraping and Prediction of Dota 2 Matches",
-    "Technologies": ["Colab", "Python"],
+    "Technologies": ["Colab", "Python", "Machine Learning"],
     "Page": "/projects/enginecompare"
   },
   {
@@ -44,7 +47,11 @@
     "TitlePL": "Transmisja plików przez port szeregowy (COM) w C++",
     "TitleEN": "File Transfer over Serial Port (COM) in C++",
     "Technologies": ["C++"],
-    "Page": "/projects/enginecompare"
+    "Page": "/projects/serialport",
+    "ProjectGoalPL": "[TUTAJ WPISZ DŁUGI OPIS PL]",
+    "ProjectGoalShortPL": "[TUTAJ WPISZ KRÓTKI OPIS PL]",
+    "ProjectGoalEN": "[ENTER LONG DESCRIPTION EN]",
+    "ProjectGoalShortEN": "[ENTER SHORT DESCRIPTION EN]"
   },
   {
     "TitlePL": "Przetwarzanie sygnałów dźwiękowych — rozpoznanie języka mówcy",
