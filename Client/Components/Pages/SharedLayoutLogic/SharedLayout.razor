@@ -2,15 +2,26 @@
 @inject IJSRuntime JS
 
 <div class="shared-layout-wrapper">
-    @if (TableOfContents != null)
-    {
-        <!-- TOC Sidebar / Fixed Button -->
-        <div class="toc-sidebar-wrapper">
-            <div class="toc-sidebar">
+    <div class="toc-sidebar-wrapper">
+        <div class="toc-sidebar" style="display: flex; gap: 12px; align-items: center;">
+            @if (TableOfContents != null)
+            {
                 <button class="toc-btn" @onclick="ToggleToc" title="@(State.CurrentLanguage == "PL" ? "Spis treści" : "Table of contents")">
                     <img src="images/icons/table-content.svg" alt="Table of Contents" />
                 </button>
-            </div>
+            }
+
+            <a href="@(string.IsNullOrEmpty(currentProject?.GithubLink) ? "#" : currentProject.GithubLink)" 
+               target="@(string.IsNullOrEmpty(currentProject?.GithubLink) ? "" : "_blank")"
+               class="toc-btn github-btn @(string.IsNullOrEmpty(currentProject?.GithubLink) ? "disabled" : "")" 
+               title="GitHub Repository"
+               @onclick:preventDefault="@(string.IsNullOrEmpty(currentProject?.GithubLink))">
+                <img src="images/icons/icons8-github-48.svg" alt="GitHub" />
+            </a>
+        </div>
+
+        @if (TableOfContents != null)
+        {
             <div class="toc-dropdown-panel @(IsTocOpen ? "open" : "")" @onclick="CloseToc">
                 <h4 class="toc-menu-title">@(State.CurrentLanguage == "PL" ? "Spis treści" : "Table of contents")</h4>
                 <div class="toc-item" onclick="window.scrollToElement('project-objective')">
@@ -21,8 +32,8 @@
                 </div>
                 @TableOfContents
             </div>
-        </div>
-    }
+        }
+    </div>
 
     <div style="display:block; width:100%;">
         <div class="wavy-container">

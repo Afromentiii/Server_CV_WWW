@@ -9,6 +9,7 @@ namespace Client.Components.Models
         public string ProjectGoalShortPL { get; set; } = string.Empty;
         public string ProjectGoalEN { get; set; } = string.Empty;
         public string ProjectGoalShortEN { get; set; } = string.Empty;
+        public string GithubLink { get; set; } = string.Empty;
         public List<string> Technologies { get; set; } = new();
     }
 }

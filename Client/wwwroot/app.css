@@ -167,8 +167,14 @@ h1:focus {
     justify-content: center;
 }
 
+.toc-btn.disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}
+
 @media (hover: hover) {
-    .toc-btn:hover {
+    .toc-btn:not(.disabled):hover {
         background: #f8fafc;
         border-color: #3b82f6;
         transform: scale(1.05);
@@ -284,6 +290,11 @@ h1:focus {
     box-sizing: border-box;
     border: 5px solid rgba(3, 5, 141, 0.548);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    /* Wymuszenie akceleracji sprzętowej (GPU) - odpowiednik "wielowątkowości" dla grafiki */
+    will-change: transform, opacity, filter, box-shadow;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .tech-card:hover {
@@ -436,4 +447,14 @@ h1:focus {
     color: #ffffff;
     box-shadow: 0 4px 6px rgba(24, 69, 146, 0.2);
     transform: translateY(-1px);
+}
+/* ==========================================
+   9. GITHUB ICON RESIZE
+   ========================================== */
+.github-btn {
+    padding: 3px; 
+}
+.github-btn img {
+    width: 32px;
+    height: 32px;
 }

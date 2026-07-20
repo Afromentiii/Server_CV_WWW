@@ -1,9 +1,9 @@
-@page "/projects/serialport"
+@page "/projects/neo4jmovieapp"
 @inject AppState State
 @inject IProjectService ProjectService
 @implements IDisposable
 
-<SharedLayout currentProject=ProjectService.GetProjects().ElementAt(6)>
+<SharedLayout currentProject=ProjectService.GetProjects().ElementAt(5)>
     <TableOfContents>
         <div class="toc-item" onclick="window.scrollToElement('movie-section')">
             @(State.CurrentLanguage == "PL" ? "Prezentacja wideo" : "Video Showcase")
@@ -17,7 +17,7 @@
             </h3>
             <div class="tech-card-body" style="text-align: center;">
                 <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <source src="/images/movies/com.webm" type="video/webm" />
+                    <source src="/images/movies/movie_app.webm" type="video/webm" />
                     Twoja przeglądarka nie obsługuje odtwarzacza wideo.
                 </video>
             </div>
