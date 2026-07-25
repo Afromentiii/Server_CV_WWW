@@ -4,10 +4,11 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 800px; /* Kontenery będą wyśrodkowane i rozciągnięte maksymalnie do tej szerokości */
+    max-width: 100%; /* Pozwala rozciągnąć się na całą szerokość strony */
     padding: 20px;
     box-sizing: border-box;
     z-index: 1;
+    margin-bottom: auto; /* Push the container to the top inside a vertically centered flex parent */
 }
 
 /* NAGŁÓWEK LISTY PROJEKTÓW */
@@ -50,12 +51,19 @@
     transform: translateX(-2px);
 }
 
-/* PIONOWA LISTA KONTENERÓW */
+/* SIATKA KONTENERÓW */
 .projects-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px; /* Odstępy między kolejnymi projektami */
     width: 100%;
+    justify-content: center;
+}
+
+@media (max-width: 1024px) {
+    .projects-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* --- KONTENER PROJEKTU (ZGODNIE ZE SZKICEM) --- */
@@ -64,18 +72,33 @@
     flex-direction: column;
     width: 100%;
     background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px; /* Łagodne zaokrąglenie całego bloku */
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
-                0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    
+    /* Statyczny, fizyczny efekt bloku 3D */
+    box-shadow: 
+        0 8px 0 #0f172a,
+        0 12px 15px rgba(0, 0, 0, 0.15);
+        
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+    
+    /* Zrobienie miejsca na dole, by cień nie ucinał się w siatce */
+    margin-bottom: 8px;
 }
 
-/* Efekt delikatnego uniesienia karty po najechaniu */
+/* Efekt mocnego uniesienia karty w 3D po najechaniu */
 .project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 16px -4px rgba(0, 0, 0, 0.08);
+    transform: translateY(-6px);
+    border-color: #184592; 
+    
+    /* "Grubszy" blok przy podniesieniu */
+    box-shadow: 
+        0 14px 0 #0f172a,
+        0 20px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* GÓRNA SEKCJA: NAZWA PROJEKTU */
@@ -105,6 +128,8 @@
     gap: 10px;
     padding: 16px 24px;
     background: linear-gradient(135deg, #3c1269 0%, #184592 100%);
+    flex-grow: 1;
+    align-content: flex-start;
 }
 
 /* BADGE / EMBLEMATY TECHNOLOGII */
