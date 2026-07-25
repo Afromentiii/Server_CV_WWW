@@ -83,7 +83,7 @@
     
     /* Statyczny, fizyczny efekt bloku 3D */
     box-shadow: 
-        0 8px 0 #0f172a,
+        0 8px 0 #555e68,
         0 12px 15px rgba(0, 0, 0, 0.15);
         
     transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
@@ -97,12 +97,12 @@
 /* Efekt mocnego uniesienia karty w 3D po najechaniu */
 .project-card:hover {
     transform: translateY(-6px);
-    border-color: #184592; 
+    border-color: #0040ff;
     
     /* "Grubszy" blok przy podniesieniu */
     box-shadow: 
-        0 14px 0 #0f172a,
-        0 20px 25px rgba(0, 0, 0, 0.2);
+        0 14px 0 #1b0d5a,
+        0 20px 25px #1b0d5a
 }
 
 /* GÓRNA SEKCJA: NAZWA PROJEKTU */
