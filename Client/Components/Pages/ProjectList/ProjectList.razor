@@ -29,14 +29,14 @@
                 </div>
             </div>
         }
-        
-        @if (!FilteredProjects.Any())
-        {
-            <div style="text-align:center; padding: 40px; color: #64748b;">
-                @(State.CurrentLanguage == "PL" ? "Brak projektów spełniających kryteria." : "No projects match the criteria.")
-            </div>
-        }
     </div>
+    
+    @if (!FilteredProjects.Any())
+    {
+        <div style="display: flex; align-items: center; justify-content: center; width: 100%; color: #64748b; font-size: 1.2rem; min-height: 40vh; text-align: center;">
+            @(State.CurrentLanguage == "PL" ? "Brak projektów spełniających kryteria." : "No projects match the criteria.")
+        </div>
+    }
 </div>
 
 @code {

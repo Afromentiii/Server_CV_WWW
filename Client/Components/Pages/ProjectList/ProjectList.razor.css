@@ -2,13 +2,15 @@
 .projects-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 100%; /* Pozwala rozciągnąć się na całą szerokość strony */
+    align-items: stretch;
+    align-self: flex-start !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
     padding: 20px;
     box-sizing: border-box;
     z-index: 1;
-    margin-bottom: auto; /* Push the container to the top inside a vertically centered flex parent */
 }
 
 /* NAGŁÓWEK LISTY PROJEKTÓW */
@@ -57,7 +59,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 24px; /* Odstępy między kolejnymi projektami */
     width: 100%;
-    justify-content: center;
+    justify-content: start; /* Zawsze od początku (lewej) */
 }
 
 @media (max-width: 1024px) {
@@ -71,6 +73,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-width: 250px;
+    min-height: 125px;
     background-color: #ffffff;
     border: 2px solid #e2e8f0;
     border-radius: 16px;
