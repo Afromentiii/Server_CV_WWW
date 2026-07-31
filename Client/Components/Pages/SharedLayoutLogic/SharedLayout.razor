@@ -18,6 +18,15 @@
                @onclick:preventDefault="@(string.IsNullOrEmpty(currentProject?.GithubLink))">
                 <img src="images/icons/icons8-github-48.svg" alt="GitHub" />
             </a>
+            
+            <a href="@(string.IsNullOrEmpty(currentProject?.PdfLink) ? "#" : currentProject.PdfLink)" 
+               target="@(string.IsNullOrEmpty(currentProject?.PdfLink) ? "" : "_blank")"
+               class="toc-btn pdf-btn @(string.IsNullOrEmpty(currentProject?.PdfLink) ? "disabled" : "")" 
+               title="PDF Document"
+               @onclick:preventDefault="@(string.IsNullOrEmpty(currentProject?.PdfLink))"
+               style="text-decoration: none; color: #444; font-weight: 900; font-family: 'Inter', sans-serif; font-size: 13px; width: 40px; height: 40px;">
+                PDF
+            </a>
         </div>
 
         @if (TableOfContents != null)

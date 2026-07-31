@@ -14,14 +14,14 @@
     display: flex;
     gap: 8px;
     
-    /* Zmiana na fixed daje pewność, że pojedzie za suwakiem */
+    
     position: fixed;
-    top: 10px;       /* 10px od góry ekranu */
-    right: 20px;     /* 20px od prawej krawędzi ekranu */
+    top: 10px;       
+    right: 20px;     
     z-index: 999;
 
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 }
 
@@ -29,42 +29,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;         /* Dopasuj wymiary do swoich potrzeb */
+    width: 35px;         
     height: 30px;        
     cursor: pointer;
     transition: transform 0.15s ease-in-out;
-    margin-right: 4px;   /* Dodatkowy, delikatny odstęp oddzielający logo od flag */
+    margin-right: 4px;   
 
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 }
 
 .home-btn:hover {
-    transform: scale(11.05); /* Delikatne powiększenie po najechaniu myszką */
+    transform: scale(11.05); 
 }
 
 .lang-selector .home-btn:active {
-    transform: scale(0.95); /* Efekt kliknięcia */
+    transform: scale(0.95); 
 }
 
 .home-logo-img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Gwarantuje, że logo nie zostanie nienaturalnie rozciągnięte */
+    object-fit: contain; 
     
 }
 
 .lang-btn {
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 
     width: 45px;      
     height: 30px;     
     padding: 0;       
     overflow: hidden; 
-    border-radius: 6px; /* Wygodniejsza wartość pikselowa dla powtarzalnych zaokrągleń */
+    border-radius: 6px; 
     border: 2px solid transparent; 
     cursor: pointer;
 
@@ -84,9 +84,9 @@
 }
 
 .lang-btn.active {
-    border-color: #050b14; /* Wyrazista, niebieska ramka */
+    border-color: #050b14; 
     box-shadow: 0 0 20px rgba(3, 9, 19, 0.4);
-    transform: scale(1.0); /* Stałe, delikatne powiększenie wybranego języka */
+    transform: scale(1.0); 
 }
 
 .lang-btn:not(.active) .flag-img {
@@ -126,23 +126,23 @@
 }
 
 
-/* --- PŁYWAJĄCA IKONA FILTRA (PO LEWEJ STRONIE) --- */
+
 .filter-sidebar {
     position: fixed;
     left: 15px;
-    margin-top: 1px;          /* Odległość od lewej krawędzi ekranu */           /* Wyśrodkowanie w pionie */
+    margin-top: 1px;                     
     transform: translateY(-50%);
-    z-index: 100;        /* Wyższy z-index, aby ikona była zawsze na wierzchu */
+    z-index: 100;        
 
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 }
 
 .filter-btn {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 50%;  /* Kołowy kształt (możesz zmienić na 12px dla zaokrąglonego kwadratu) */
+    border-radius: 50%;  
     padding: 7px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -164,19 +164,19 @@
 }
 
 .filter-btn img {
-    width: 24px;         /* Dopasuj rozmiar swojej ikony */
+    width: 24px;         
     height: 24px;
     object-fit: contain;
 }
 
-/* Responsywność: Gdy ekran jest bardzo mały, przenosimy filtr np. w inne miejsce, żeby nie zasłaniał treści */
+
 @media (max-width: 1024px) {
     .filter-sidebar {
-        left: 15px;      /* Zmniejszamy margines na mniejszych ekranach */
+        left: 15px;      
     }
 }
 
-/* Wrapper grupujący przycisk oraz rozwijane menu */
+
 .filter-sidebar-wrapper {
     position: fixed;
     display: flex;
@@ -185,20 +185,20 @@
     z-index: 100;
 }
 
-/* Poprawka Twojej klasy (usunięte błędne marginesy i transformaty kolidujące z nowym układem) */
+
 .filter-sidebar {
     user-select: none;
 }
 
-/* ANIMOWANY PROSTOKĄT (PANEL Z CHECKBOXAMI) */
+
 .filter-dropdown-panel {
     margin-top: 25px;        
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 16px; /* Zaokrąglone krawędzie */
+    border-radius: 16px; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     padding: 0px;
-    max-width: 0px;    /* Startowa szerokość dla animacji */
+    max-width: 0px;    
     opacity: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -207,10 +207,10 @@
     flex-direction: column;
 }
 
-/* Klasa aktywowana przez Blazora po kliknięciu ikonki */
+
 .filter-dropdown-panel.open {
     padding: 16px;
-    max-width: 260px; /* Docelowa szerokość prostokąta */
+    max-width: 260px; 
     opacity: 1;
 }
 
@@ -224,13 +224,13 @@
     padding-bottom: 6px;
 }
 
-/* Układ checkboxów */
+
 .checkbox-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
     max-height: 300px;
-    overflow-y: auto; /* Przewijanie wewnętrzne jeśli technologii będzie za dużo */
+    overflow-y: auto; 
     padding-right: 15px;
 }
 
@@ -249,10 +249,10 @@
     color: #3b82f6;
 }
 
-/* Opcjonalny tuning wyglądu standardowego checkboxa */
+
 .checkbox-label input {
     cursor: pointer;
     width: 16px;
     height: 16px;
-    accent-color: #520897; /* Kolor zaznaczenia pasujący do reszty designu */
+    accent-color: #520897; 
 }

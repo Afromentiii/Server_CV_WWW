@@ -5,7 +5,28 @@ public class AppState
     public bool IsShowingFilter { get;  set; } = false;
     public bool IsFilterMenuOpen { get; set; } = false;
     public List<string> SelectedTechnologies { get; private set; } = new();
+    
+    public bool IsImageModalOpen { get; private set; } = false;
+    public string CurrentModalImageSrc { get; private set; } = string.Empty;
+    public string CurrentModalImageAlt { get; private set; } = string.Empty;
+
     public event Action? OnChange;
+
+    public void OpenImageModal(string src, string alt)
+    {
+        CurrentModalImageSrc = src;
+        CurrentModalImageAlt = alt;
+        IsImageModalOpen = true;
+        NotifyStateChanged();
+    }
+
+    public void CloseImageModal()
+    {
+        IsImageModalOpen = false;
+        CurrentModalImageSrc = string.Empty;
+        CurrentModalImageAlt = string.Empty;
+        NotifyStateChanged();
+    }
 
     public readonly Dictionary<string, string> IconToImgPath = new(StringComparer.OrdinalIgnoreCase)
     {

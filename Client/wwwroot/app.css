@@ -68,23 +68,23 @@ h1:focus {
 }
 
 
-/* Klasa bazowa, którą możesz dopisać do DOWOLNEGO diva */
+
 .wavy-container {
     position: relative;
     width: 100%;
-    /* Upiększenie: Głęboki, elegancki, nowoczesny gradient dark-mode */
+    
     background: linear-gradient(135deg, #3c1269 0%, #184592 100%);
-    padding: 60px 20px; /* Przestrzeń w pionie, żeby tekst nie dotykał fal */
+    padding: 60px 20px; 
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
-/* Stylizacja tekstu wewnątrz fali */
+
 .wavy-title {
     font-family: 'Archivo Black', sans-serif;
     font-size: 3.2rem;
-    font-weight: 400; /* Archivo Black is inherently bold */
+    font-weight: 400; 
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -93,7 +93,7 @@ h1:focus {
     text-align: center;
 }
 
-/* Responsywność dla mniejszych ekranów */
+
 @media (max-width: 768px) {
     .wavy-container {
         padding: 45px 15px;
@@ -126,7 +126,7 @@ h1:focus {
     }
 }
 
-/* --- Table of Contents Sidebar (matching Filter style) --- */
+
 .shared-layout-wrapper {
     position: relative;
     width: 100%;
@@ -139,7 +139,7 @@ h1:focus {
     align-items: flex-start;
     gap: 12px;
     z-index: 100;
-    top: 24px; /* Force wrapper to the header's padding position */
+    top: 24px; 
     left: 24px;
 }
 
@@ -255,9 +255,7 @@ h1:focus {
     padding-left: 18px;
 }
 
-/* ==========================================
-   1. DEFINICJA ANIMACJI WEJŚCIA
-   ========================================== */
+
 @keyframes cardFadeIn {
     0% {
         opacity: 0;
@@ -274,9 +272,7 @@ h1:focus {
     }
 }
 
-/* ==========================================
-   2. GŁÓWNA STRUKTURA KARTY (.tech-card)
-   ========================================== */
+
 .tech-card {
     position: relative;
     display: flex;
@@ -291,7 +287,7 @@ h1:focus {
     border: 5px solid rgba(3, 5, 141, 0.548);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* Wymuszenie akceleracji sprzętowej (GPU) - odpowiednik "wielowątkowości" dla grafiki */
+    
     will-change: transform, opacity, filter, box-shadow;
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -319,9 +315,7 @@ h1:focus {
     display: block;
 }
 
-/* ==========================================
-   4. STYLIZACJA TEKSTU (POPRAWIONA)
-   ========================================== */
+
 .tech-card-body p {
     font-family: Inter, Roboto, "Open Sans", "Lato", sans-serif;
     font-size: 1.05rem;
@@ -352,9 +346,7 @@ h1:focus {
     font-weight: 600;
 }
 
-/* ==========================================
-   5. STYLIZACJA LINKÓW W TEKŚCIE
-   ========================================== */
+
 .tech-card-body a {
     color: #184592;
     text-decoration: none;
@@ -362,9 +354,7 @@ h1:focus {
     transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-/* ==========================================
-   6. KLASY KONTROLNE DLA REJESTRACJI BLOW/ANIMACJI
-   ========================================== */
+
 .hide-card {
     opacity: 0;
     filter: blur(8px);
@@ -390,9 +380,7 @@ h1:focus {
     animation-delay: 0.4s;
 }
 
-/* ==========================================
-   7. BADGE TECHNOLOGII (.shared-tech-badge)
-   ========================================== */
+
 .shared-tech-badge {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
@@ -422,9 +410,7 @@ h1:focus {
     object-fit: contain;
 }
 
-/* ==========================================
-   8. PRZEŁĄCZNIK WERSJI (.version-toggle-btn)
-   ========================================== */
+
 .version-toggle-btn {
     background: transparent;
     border: 2px solid #184592;
@@ -448,13 +434,81 @@ h1:focus {
     box-shadow: 0 4px 6px rgba(24, 69, 146, 0.2);
     transform: translateY(-1px);
 }
-/* ==========================================
-   9. GITHUB ICON RESIZE
-   ========================================== */
+
 .github-btn {
     padding: 3px; 
 }
 .github-btn img {
     width: 32px;
     height: 32px;
+}
+
+
+/* Image Modal Styles */
+.clickable-chart {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.clickable-chart:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 10000;
+    transition: color 0.2s ease;
+}
+
+.image-modal-close:hover {
+    color: #d1d5db;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }

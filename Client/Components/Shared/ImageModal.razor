@@ -1,0 +1,24 @@
+@if (IsOpen)
+{
+    <div class="image-modal-overlay" @onclick="CloseModal">
+        <button class="image-modal-close" @onclick="CloseModal">&times;</button>
+        <div class="image-modal-content" @onclick:stopPropagation="true">
+            <img src="@ImageSrc" alt="@ImageAlt" />
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public string ImageSrc { get; set; } = string.Empty;
+    [Parameter] public string ImageAlt { get; set; } = string.Empty;
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private async Task CloseModal()
+    {
+        if (OnClose.HasDelegate)
+        {
+            await OnClose.InvokeAsync();
+        }
+    }
+}

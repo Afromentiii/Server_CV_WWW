@@ -1,4 +1,4 @@
-/* --- KONTENER GŁÓWNY DLA WIDOKU PROJEKTÓW --- */
+
 .projects-container {
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
     z-index: 1;
 }
 
-/* NAGŁÓWEK LISTY PROJEKTÓW */
+
 .projects-header {
     display: flex;
     align-items: center;
@@ -29,7 +29,7 @@
     margin: 0;
 }
 
-/* PRZYCISK POWROTU */
+
 .back-btn {
     display: flex;
     align-items: center;
@@ -53,13 +53,13 @@
     transform: translateX(-2px);
 }
 
-/* SIATKA KONTENERÓW */
+
 .projects-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px; /* Odstępy między kolejnymi projektami */
+    gap: 24px; 
     width: 100%;
-    justify-content: start; /* Zawsze od początku (lewej) */
+    justify-content: start; 
 }
 
 @media (max-width: 1024px) {
@@ -68,7 +68,7 @@
     }
 }
 
-/* --- KONTENER PROJEKTU (ZGODNIE ZE SZKICEM) --- */
+
 .project-card {
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@
     overflow: hidden;
     cursor: pointer;
     
-    /* Statyczny, fizyczny efekt bloku 3D */
+    
     box-shadow: 
         0 8px 0 #555e68,
         0 12px 15px rgba(0, 0, 0, 0.15);
@@ -90,26 +90,26 @@
                 box-shadow 0.25s ease,
                 border-color 0.25s ease;
     
-    /* Zrobienie miejsca na dole, by cień nie ucinał się w siatce */
+    
     margin-bottom: 8px;
 }
 
-/* Efekt mocnego uniesienia karty w 3D po najechaniu */
+
 .project-card:hover {
     transform: translateY(-6px);
     border-color: #0040ff;
     
-    /* "Grubszy" blok przy podniesieniu */
+    
     box-shadow: 
         0 14px 0 #1b0d5a,
         0 20px 25px #1b0d5a
 }
 
-/* GÓRNA SEKCJA: NAZWA PROJEKTU */
+
 .project-title-section {
     padding: 20px 24px;
     background-color: #ffffff;
-    /* Linia oddzielająca na dole nazwy (jak na Twoim rysunku) */
+    
     border-bottom: 1px solid #e2e8f0; 
 }
 
@@ -120,12 +120,12 @@
     margin: 0;
     text-align: center;
 
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 }
 
-/* DOLNA SEKCJA: TECHNOLOGIE */
+
 .project-tech-section {
     display: flex;
     flex-wrap: wrap;
@@ -136,7 +136,7 @@
     align-content: flex-start;
 }
 
-/* BADGE / EMBLEMATY TECHNOLOGII */
+
 .tech-badge {
     background-color: #ffffff;
     color: #000000;
@@ -150,11 +150,11 @@
     
     text-align: center;
     display: flex;
-    justify-content: center; /* poziomo */
+    justify-content: center; 
     align-items: center;   
 
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 
 }

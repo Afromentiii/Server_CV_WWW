@@ -6,56 +6,741 @@
 <SharedLayout currentProject=ProjectService.GetProjects().ElementAt(0)>
     <TableOfContents>
         <div class="toc-item" onclick="window.scrollToElement('movie-section')">
-            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Aquarium)" : "Video Showcase (Aquarium)")
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Aquarium)" : "Video Showcase (Aquarium)"))
         </div>
         <div class="toc-item" onclick="window.scrollToElement('movie-section-fox')">
-            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Fox)" : "Video Showcase (Fox)")
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Fox)" : "Video Showcase (Fox)"))
         </div>
         <div class="toc-item" onclick="window.scrollToElement('movie-section-map')">
-            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Map)" : "Video Showcase (Map)")
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Map)" : "Video Showcase (Map)"))
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('research-section')">
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Badania i metodologia" : "Research & Methodology"))
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('aquarium-results')">
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki (Akwarium)" : "Results (Aquarium)"))
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('fox-results')">
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki (Lisy)" : "Results (Foxes)"))
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('map-results')">
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki (Mapa)" : "Results (Map)"))
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('conclusions')">
+            @((MarkupString)(State.CurrentLanguage == "PL" ? "Podsumowanie" : "Summary"))
         </div>
     </TableOfContents>
 
     <ChildContent>
         <div class="tech-card hide-card" id="movie-section">
             <h3 class="tech-card-title">
-                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Aquarium)" : "Video Showcase (Aquarium)")
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Aquarium)" : "Video Showcase (Aquarium)"))
             </h3>
-            <div class="tech-card-body" style="text-align: center;">
-                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <source src="/images/movies/aquarium.webm" type="video/webm" />
-                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-                </video>
+            <div class="tech-card-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <source src="/images/movies/aquarium.webm" type="video/webm" />
+                        Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                    </video>
+                </div>
+
+                <div class="description-container" style="text-align: left;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 style="margin: 0; color: #fff;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Opis sceny" : "Scene Description"))</h4>
+                        <div>
+                            <button class="version-toggle-btn" @onclick="() => _showLongDescAquarium = !_showLongDescAquarium">
+                                @(_showLongDescAquarium ? (State.CurrentLanguage == "PL" ? "Wersja: Pełna" : "Version: Full") : (State.CurrentLanguage == "PL" ? "Wersja: Skrócona" : "Version: Short"))
+                            </button>
+                        </div>
+                    </div>
+                    <div class="description-content p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px;">
+                        @if (!_showLongDescAquarium)
+                        {
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">@((MarkupString)(State.CurrentLanguage == "PL" ? "Scenariusz testujący wydajność podsystemów fizyki poprzez symulację swobodnego opadania 11 970 sześcianów do wnętrza modelu „Aquarium”. Celem było wygenerowanie rosnącej liczby jednoczesnych kontaktów i kolizji między obiektami." : "A scenario testing the performance of physics subsystems through the simulation of 11,970 cubes in free fall into the 'Aquarium' model. The goal was to generate an increasing number of simultaneous contacts and collisions."))</p>
+                        }
+                        else
+                        {
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">@((MarkupString)(State.CurrentLanguage == "PL" ? "Pierwszy scenariusz badawczy miał na celu przetestowanie i porównanie wydajności wbudowanych podsystemów fizyki w badanych silnikach. Wykorzystano wbudowane w silniki modele siatki 3D reprezentujące sześciany z nałożonym podstawowym niebieskim materiałem oraz siatką kolizyjną typu pudełkowego. Modelem docelowym był obiekt o nazwie „Aquarium”. Mechanika symulacji opierała się na proceduralnym generowaniu kolejnych, zwartych i prostokątnych warstw sześcianów w regularnych odstępach czasu. Procedura ta była powtarzana przez 19 iteracji, co łącznie dało 11 970 sześcianów. Swobodne opadanie fal obiektów powodowało systematyczne i powtarzalne zwiększanie liczby jednoczesnych kontaktów oraz kolizji, stanowiąc intensywny test dla podsystemu fizyki." : "The first research scenario aimed to test and compare the performance of built-in physics subsystems. Built-in 3D mesh models representing cubes with a basic blue material and box colliders were used. The target model was an object named 'Aquarium'. The simulation mechanics relied on procedural generation of compact, rectangular layers of cubes at regular intervals. This procedure was repeated for 19 iterations, totaling 11,970 cubes. The free fall of successive waves of objects caused a systematic increase in simultaneous collisions, providing an intensive test for the physics engine."))</p>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="tech-card hide-card" id="movie-section-fox">
             <h3 class="tech-card-title">
-                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Fox)" : "Video Showcase (Fox)")
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Fox)" : "Video Showcase (Fox)"))
             </h3>
-            <div class="tech-card-body" style="text-align: center;">
-                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <source src="/images/movies/fox_compare.webm" type="video/webm" />
-                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-                </video>
+            <div class="tech-card-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <source src="/images/movies/fox_compare.webm" type="video/webm" />
+                        Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                    </video>
+                </div>
+
+                <div class="description-container" style="text-align: left;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 style="margin: 0; color: #fff;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Opis sceny" : "Scene Description"))</h4>
+                        <div>
+                            <button class="version-toggle-btn" @onclick="() => _showLongDescFox = !_showLongDescFox">
+                                @(_showLongDescFox ? (State.CurrentLanguage == "PL" ? "Wersja: Pełna" : "Version: Full") : (State.CurrentLanguage == "PL" ? "Wersja: Skrócona" : "Version: Short"))
+                            </button>
+                        </div>
+                    </div>
+                    <div class="description-content p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px;">
+                        @if (!_showLongDescFox)
+                        {
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">@((MarkupString)(State.CurrentLanguage == "PL" ? "Test sprawdzający narzut związany z renderowaniem i obsługą animacji szkieletowej dużej liczby poruszających się postaci. W kolejnych cyklach iteracyjnych liczba modeli lisów na scenie była podwajana (od 16 do 1024), poruszając się w kierunku wyznaczonego centrum." : "A test checking the overhead associated with rendering and handling skeletal animation of a large number of moving characters. In successive iterative cycles, the number of fox models on the scene was doubled (from 16 to 1024), moving towards a designated center."))</p>
+                        }
+                        else
+                        {
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">@((MarkupString)(State.CurrentLanguage == "PL" ? "Drugi scenariusz badawczy został zaprojektowany w celu przetestowania wydajności silników pod kątem obciążenia generowanego przez symulację ruchu dużej liczby animowanych obiektów. W roli głównego obiektu wykorzystano niskopoligonowy model lisa z dwoma sekwencjami animacji szkieletowej: chodu oraz spoczynku. Mechanika opierała się na proceduralnym rozmieszczaniu kolejnych fal lisów na obwodzie okręgu, odgórnie zorientowanych frontem do centrum. Logika zachowania oparta na prostej maszynie stanów wymuszała ruch do przodu, a po przekroczeniu granicy strefy następowała zmiana stanu na spoczynek. Test był procesem iteracyjnym, w którym liczba obiektów początkowo wynosiła 16, a w każdym kolejnym z siedmiu cykli była podwajana, skokowo zwiększając obciążenie procesora i układu graficznego." : "The second research scenario was designed to test the engines' performance under the load generated by simulating the movement of a large number of animated objects. A low-poly fox model with two skeletal animation sequences (walk and idle) was used as the main object. The mechanics were based on procedural placement of successive waves of foxes on the circumference of a circle, facing the center. Logic based on a simple state machine forced forward movement until a threshold was crossed. The test was an iterative process where the number of objects doubled in each of the seven cycles, step-wise increasing the <strong>CPU</strong> and <strong>GPU</strong> load."))</p>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="tech-card hide-card" id="movie-section-map">
             <h3 class="tech-card-title">
-                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Map)" : "Video Showcase (Map)")
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Prezentacja wideo (Map)" : "Video Showcase (Map)"))
             </h3>
-            <div class="tech-card-body" style="text-align: center;">
-                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <source src="/images/movies/map_compare.webm" type="video/webm" />
-                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-                </video>
+            <div class="tech-card-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <source src="/images/movies/map_compare.webm" type="video/webm" />
+                        Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                    </video>
+                </div>
+
+                <div class="description-container" style="text-align: left;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 style="margin: 0; color: #fff;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Opis sceny" : "Scene Description"))</h4>
+                        <div>
+                            <button class="version-toggle-btn" @onclick="() => _showLongDescMap = !_showLongDescMap">
+                                @(_showLongDescMap ? (State.CurrentLanguage == "PL" ? "Wersja: Pełna" : "Version: Full") : (State.CurrentLanguage == "PL" ? "Wersja: Skrócona" : "Version: Short"))
+                            </button>
+                        </div>
+                    </div>
+                    <div class="description-content p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px;">
+                        @if (!_showLongDescMap)
+                        {
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">@((MarkupString)(State.CurrentLanguage == "PL" ? "Złożona scena 3D zróżnicowana pod względem geometrii i materiałów, sprawdzająca ogólną wydajność potoku renderowania. Test polegał na automatycznym przenoszeniu kamery przez sekwencję predefiniowanych, różnorodnych kadrów pomiarowych." : "A complex 3D scene with diverse geometry and materials, testing the overall performance of the rendering pipeline. The test consisted of automatically moving the camera through a sequence of predefined, diverse measurement frames."))</p>
+                        }
+                        else
+                        {
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">@((MarkupString)(State.CurrentLanguage == "PL" ? "Trzeci scenariusz zaprojektowano w celu dokonania oceny wydajności na podstawie złożonej sceny 3D, charakteryzującej się znacznym zróżnicowaniem geometrii oraz materiałów. Podstawę świata stanowił pojedynczy obiekt siatki terenu, do którego zaimportowano zróżnicowany zestaw modeli, w tym elementy architektoniczne, roślinność oraz animowane postaci. Głównym oświetleniem było światło kierunkowe o zasięgu 4000 metrów z nałożonymi cieniami. Przebieg testu realizowano sekwencyjnie poprzez zautomatyzowaną zmianę perspektywy obserwatora na podstawie zdefiniowanej listy punktów kontrolnych reprezentujących różnorodne kadry. Każdy punkt zawierał fazę stabilizacji, w której kamera pozostawała statyczna dla rzetelnego pomiaru." : "The third scenario was designed to evaluate performance based on a complex 3D scene, characterized by significant diversity in geometry and materials. The base of the world was a single terrain mesh object, onto which a diverse set of models was imported, including architectural elements, vegetation, and animated characters. The main lighting was a directional light with a range of 4000 meters and shadows enabled. The test run was executed sequentially through automated camera perspective changes based on a predefined list of waypoints representing various frames. Each point included a stabilization phase where the camera remained static for reliable measurement."))</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="research-section">
+            <h3 class="tech-card-title">
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Metodologia i cel badań" : "Methodology and Research Goal"))
+            </h3>
+            <div class="tech-card-body">
+                <div class="d-flex justify-content-end mb-3">
+                    <button class="version-toggle-btn" @onclick="ToggleDescriptionLength">
+                        @(showLongDescription ? (State.CurrentLanguage == "PL" ? "Wersja: Pełna" : "Version: Full") : (State.CurrentLanguage == "PL" ? "Wersja: Skrócona" : "Version: Short"))
+                    </button>
+                </div>
+
+                @if (!showLongDescription)
+                {
+                    <p style="text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "W ramach testów porównano wydajność silników <strong>Godot</strong>, <strong>Unity</strong> i <strong>Unreal</strong> w trzech różnych scenariuszach 3D: symulacji fizyki sześcianów (Akwarium), renderowaniu animowanych postaci (Lisy) oraz złożonej scenie statycznej (Mapa). Mierzono liczbę klatek na sekundę (FPS), stabilność czasu klatki (Frametime), zużycie pamięci <strong>RAM</strong>/<strong>VRAM</strong> oraz czas dodawania obiektów do sceny." : "The tests compared the performance of <strong>Godot</strong>, <strong>Unity</strong>, and <strong>Unreal</strong> engines in three 3D scenarios: cube physics simulation (Aquarium), animated character rendering (Foxes), and a complex static scene (Map). Measurements included frames per second (FPS), frametime stability, <strong>RAM</strong>/<strong>VRAM</strong> usage, and object instantiation time."))
+                    </p>
+                }
+                else
+                {
+                    <p style="text-indent: 1.5em; text-align: justify;" class="mb-4">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Głównym celem badawczym było zweryfikowanie, w jaki sposób odmienne założenia architektoniczne poszczególnych silników (<strong>Godot</strong>, <strong>Unity</strong>, <strong>Unreal</strong>) oraz niskopoziomowe interfejsy programistyczne grafiki (<strong>Vulkan</strong>, <strong>DirectX 12</strong>) wpływają na płynność generowania obrazu, stabilność czasów klatek, wykorzystanie zasobów sprzętowych oraz czas dynamicznego dodawania obiektów." : "The main research goal was to verify how different architectural assumptions of individual engines (<strong>Godot</strong>, <strong>Unity</strong>, <strong>Unreal</strong>) and low-level graphics APIs (<strong>Vulkan</strong>, <strong>DirectX 12</strong>) affect framerate, frametime stability, hardware resource utilization, and dynamic object instantiation time."))
+                    </p>
+
+                    <div class="methodology-block mb-5">
+                        <h4 style="color: #184592; font-weight: 700; margin-bottom: 20px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Stanowiska badawcze" : "Test Environments"))</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" style="border-collapse: collapse; width: 100%;">
+                                <thead style="border-bottom: 2px solid #184592;">
+                                    <tr>
+                                        <th style="border: 1px solid #dee2e6; padding: 10px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Parametr" : "Parameter"))</th>
+                                        <th style="border: 1px solid #dee2e6; padding: 10px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Stanowisko A" : "Environment A"))</th>
+                                        <th style="border: 1px solid #dee2e6; padding: 10px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Stanowisko B" : "Environment B"))</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Procesor" : "Processor"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">AMD Ryzen 5 2600<br>6 rdzeni / 12 wątków, 3,4–4,0 GHz<br>19 MB cache</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Intel Core i5-14600KF<br>14 rdzeni / 20 wątków, 3,5–5,3 GHz<br>24 MB cache</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Karta graficzna" : "Graphics Card"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Palit GeForce RTX 2060 Gaming Pro OC<br>6 GB GDDR6, 1365–1830 MHz, 14000 MHz</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Gigabyte GeForce RTX 5070 Windforce OC SFF<br>12 GB GDDR7, 2542 MHz, 28000 MHz</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Pamięć RAM" : "RAM"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Corsair Vengeance LPX Black<br>16 GB DDR4 (2 × 8 GB), 2933 MHz, CL16</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Kingston Fury Beast RGB<br>32 GB DDR5 (2 × 16 GB), 5600 MHz, CL40</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">Dysk SATA</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Crucial MX500<br>TLC, odczyt/zapis: 560/510 MB/s</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Brak</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">Dysk M.2</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Samsung NVMe 990 EVO Plus<br>TLC, odczyt/zapis: 7150/6300 MB/s</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">GOODRAM NVMe PX500<br>TLC, odczyt/zapis: 2000/1600 MB/s</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Płyta główna" : "Motherboard"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">MSI B450 Tomahawk<br>AM4, AMD B450</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">ASUS TUF B760-PLUS Gaming<br>LGA 1700, Intel B760</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "System operacyjny" : "Operating System"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Windows 10 Home<br>Aktualizacja skumulowana KB5066747</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">Windows 11 Pro<br>Pakiet Windows Feature Experience 1000.26100.297.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Sterownik graficzny" : "Graphics Driver"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">NVIDIA GeForce Game Ready 596.49</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">NVIDIA GeForce Game Ready 596.49</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Rozdzielczość" : "Resolution"))</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">2560 × 1440</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">2560 × 1440</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px; font-weight: 600;">Vulkan SDK</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">1.4.335</td>
+                                        <td style="border: 1px solid #dee2e6; padding: 10px;">1.4.350.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="methodology-block mb-5">
+                        <h4 style="color: #184592; font-weight: 700; margin-bottom: 20px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przygotowanie środowiska pomiarowego" : "Measurement Environment Preparation"))</h4>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div>
+                                    <h5 style="color: #111622; font-weight: 600; border-bottom: 1px solid #184592; padding-bottom: 5px; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "System operacyjny:" : "Operating System:"))</h5>
+                                    <ul style="padding-left: 20px;">
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Tryb gry: włączony" : "Game Mode: enabled"))</li>
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Profil zasilania: Najwyższa wydajność" : "Power profile: Ultimate Performance"))</li>
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Priorytet procesu: wysoki (High) dla badanych silników" : "High priority for evaluated engines processes"))</li>
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Sprzętowe planowanie GPU (HAGS): aktywne" : "Hardware-Accelerated GPU Scheduling (HAGS): active"))</li>
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Aplikacje i usługi w tle: wyłączone" : "Background apps and telemetry: disabled"))</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <h5 style="color: #111622; font-weight: 600; border-bottom: 1px solid #184592; padding-bottom: 5px; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Sterownik graficzny:" : "Graphics Driver:"))</h5>
+                                    <ul style="padding-left: 20px;">
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Tryb zarządzania energią: preferuj maksymalną wydajność" : "Power management mode: prefer maximum performance"))</li>
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Filtrowanie tekstur (Jakość): wysoka wydajność" : "Texture filtering quality: high performance"))</li>
+                                        <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Tryb niskiego opóźnienia: wyłączony" : "Low latency mode: off"))</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="methodology-block mb-2">
+                        <h4 style="color: #184592; font-weight: 700; margin-bottom: 20px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg testów i pomiary:" : "Test Execution and Measurements:"))</h4>
+                        <div>
+                            <p style=" margin-bottom: 15px; text-indent: 1.5em; text-align: justify;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Pomiary odbywały się wyłącznie w skompilowanych, natywnych wersjach produkcyjnych projektów w celu wyeliminowania narzutu środowiska edytora (ang. editor overhead). Do zbierania telemetrii użyto programu MSI Afterburner z częstotliwością próbkowania 100 ms. Rejestrowano kluczowe metryki:" : "Measurements were conducted exclusively in compiled, native production builds to eliminate editor overhead. Telemetry data was collected using MSI Afterburner with a 100 ms polling rate. Key collected metrics:"))</p>
+                            
+                            <ul style="margin-bottom: 20px; padding-left: 20px;">
+                                <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Czas klatki (Frametime) oraz średnia liczba klatek na sekundę (FPS)" : "Frametime and average FPS"))</li>
+                                <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Globalne oraz wątkowe użycie procesora (CPU)" : "Global and per-thread CPU usage"))</li>
+                                <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Użycie karty graficznej (GPU)" : "GPU utilization"))</li>
+                                <li>@((MarkupString)(State.CurrentLanguage == "PL" ? "Użycie pamięci operacyjnej procesu (RAM) oraz wideo (VRAM)" : "Process RAM and VRAM usage"))</li>
+                            </ul>
+                            
+                            <p style=" margin-bottom: 0; text-indent: 1.5em; text-align: justify;">
+                                @((MarkupString)(State.CurrentLanguage == "PL" ? "Każdy scenariusz był testowany niezależnie 3-krotnie w interfejsach <strong>DirectX 12</strong> oraz <strong>Vulkan</strong> na obu stanowiskach." : "Each scenario was tested independently 3 times using <strong>DirectX 12</strong> and <strong>Vulkan</strong> APIs on both environments."))
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="aquarium-results">
+            <h3 class="tech-card-title">
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki - Symulacja fizyki (Akwarium)" : "Results - Physics Simulation (Aquarium)"))
+            </h3>
+            <div class="tech-card-body">
+                
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnia liczba klatek na sekundę (FPS)" : "Average FPS"))</h5>
+                    <img src="/img/thesis/fps_srednia_akwarium.png" alt="FPS Akwarium" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/fps_srednia_akwarium.png", "FPS Akwarium")' />
+                    <p style=" margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Wykres przedstawia zdecydowaną dominację silnika <strong>Godot</strong> w płynności symulacji setek spadających sześcianów (osiągając ponad 800 FPS na platformie High-end). <strong>Unity</strong> zajęło stabilne drugie miejsce z zauważalnie niższym klatkażem. <strong>Unreal Engine</strong> natomiast zmagał się z potężnym narzutem obliczeniowym swojego zaawansowanego silnika fizyki Chaos, generując znaczne opóźnienia przy tak masywnych kolizjach wieloobiektowych." : "The chart illustrates <strong>Godot</strong>'s clear dominance in simulating thousands of falling cubes, achieving over 800 FPS on high-end hardware. <strong>Unity</strong> took a stable second place with noticeably lower fluidity. <strong>Unreal Engine</strong> struggled with the immense computational overhead of its advanced Chaos physics subsystem, generating significant delays with such massive multi-object collisions."))
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Zbiorcze zestawienie średniego obciążenia zasobów sprzętowych" : "Hardware Resources Load Summary"))</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
+                            <thead style="background-color: #f1f5f9;">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">Silnik</th>
+                                    <th colspan="3">Stanowisko A (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                    <th colspan="3">Stanowisko B (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                </tr>
+                                <tr>
+                                    <th>VRAM [MB]</th>
+                                    <th>CPU [%]</th>
+                                    <th>GPU [%]</th>
+                                    <th>VRAM [MB]</th>
+                                    <th>CPU [%]</th>
+                                    <th>GPU [%]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Godot</strong></td>
+                                    <td><span style="color: #16a34a;">336</span> / <span style="color: #dc2626;">562</span></td>
+                                    <td><span style="color: #16a34a;">24,2</span> / <span style="color: #dc2626;">27,0</span></td>
+                                    <td><span style="color: #16a34a;">44,1</span> / <span style="color: #dc2626;">58,8</span></td>
+                                    <td><span style="color: #16a34a;">403</span> / <span style="color: #dc2626;">616</span></td>
+                                    <td><span style="color: #16a34a;">21,8</span> / <span style="color: #dc2626;">17,8</span></td>
+                                    <td><span style="color: #16a34a;">33,2</span> / <span style="color: #dc2626;">58,3</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unity</strong></td>
+                                    <td><span style="color: #16a34a;">1254</span> / <span style="color: #dc2626;">1490</span></td>
+                                    <td><span style="color: #16a34a;">59,3</span> / <span style="color: #dc2626;">64,7</span></td>
+                                    <td><span style="color: #16a34a;">53,1</span> / <span style="color: #dc2626;">55,1</span></td>
+                                    <td><span style="color: #16a34a;">1419</span> / <span style="color: #dc2626;">1474</span></td>
+                                    <td><span style="color: #16a34a;">61,4</span> / <span style="color: #dc2626;">59,1</span></td>
+                                    <td><span style="color: #16a34a;">51,9</span> / <span style="color: #dc2626;">71,1</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unreal</strong></td>
+                                    <td><span style="color: #16a34a;">2662</span> / <span style="color: #dc2626;">3132</span></td>
+                                    <td><span style="color: #16a34a;">51,7</span> / <span style="color: #dc2626;">50,0</span></td>
+                                    <td><span style="color: #16a34a;">39,4</span> / <span style="color: #dc2626;">45,3</span></td>
+                                    <td><span style="color: #16a34a;">2709</span> / <span style="color: #dc2626;">3180</span></td>
+                                    <td><span style="color: #16a34a;">43,8</span> / <span style="color: #dc2626;">28,5</span></td>
+                                    <td><span style="color: #16a34a;">65,7</span> / <span style="color: #dc2626;">67,9</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style=" margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza wykorzystania zasobów ukazuje najniższe zapotrzebowanie Godota, który alokuje najmniej pamięci wideo i najsłabiej obciąża procesor. <strong>Unity</strong> generuje znacznie wyższe obciążenie <strong>CPU</strong>, a <strong>Unreal</strong> zdecydowanie najsilniej konsumuje <strong>VRAM</strong>, z bazowym narzutem powyżej 2.5 GB nawet w tak prostej scenie." : "Resource usage analysis reveals <strong>Godot</strong>'s lowest footprint, allocating the least <strong>VRAM</strong> and putting the lowest strain on the <strong>CPU</strong>. <strong>Unity</strong> generates noticeably higher <strong>CPU</strong> load, while <strong>Unreal</strong> heavily consumes <strong>VRAM</strong> with a baseline overhead exceeding 2.5 GB even in such a simple scene."))
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Zestawienie najdłuższych klatek oraz średniej z 1% Low [ms]" : "Longest frames and 1% Low average [ms]"))</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
+                            <thead style="background-color: #f1f5f9;">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">Silnik</th>
+                                    <th colspan="2">Stanowisko A (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                    <th colspan="2">Stanowisko B (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                </tr>
+                                <tr>
+                                    <th>Najdłuższa (#1)</th>
+                                    <th>Śr. 1% Low</th>
+                                    <th>Najdłuższa (#1)</th>
+                                    <th>Śr. 1% Low</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Godot</strong></td>
+                                    <td><span style="color: #16a34a;">547,2</span> / <span style="color: #dc2626;">390,0</span></td>
+                                    <td><span style="color: #16a34a;">300,5</span> / <span style="color: #dc2626;">277,1</span></td>
+                                    <td><span style="color: #16a34a;">81,4</span> / <span style="color: #dc2626;">73,1</span></td>
+                                    <td><span style="color: #16a34a;">68,2</span> / <span style="color: #dc2626;">61,4</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unity</strong></td>
+                                    <td><span style="color: #16a34a;">342,1</span> / <span style="color: #dc2626;">345,9</span></td>
+                                    <td><span style="color: #16a34a;">317,1</span> / <span style="color: #dc2626;">326,5</span></td>
+                                    <td><span style="color: #16a34a;">25,4</span> / <span style="color: #dc2626;">24,2</span></td>
+                                    <td><span style="color: #16a34a;">20,3</span> / <span style="color: #dc2626;">19,1</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unreal</strong></td>
+                                    <td><span style="color: #16a34a;">2576,6</span> / <span style="color: #dc2626;">2601,4</span></td>
+                                    <td><span style="color: #16a34a;">2354,3</span> / <span style="color: #dc2626;">2357,9</span></td>
+                                    <td><span style="color: #16a34a;">748,2</span> / <span style="color: #dc2626;">754,2</span></td>
+                                    <td><span style="color: #16a34a;">565,2</span> / <span style="color: #dc2626;">544,9</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza skrajnych opóźnień renderowania (1% Low) wykazała najwyższą stabilność w środowisku <strong>Unity</strong>, w którym maksymalne zacięcia nie przekraczały akceptowalnych wartości. Silnik <strong>Godot</strong> uzyskał zbliżoną stabilność na słabszej konfiguracji sprzętowej. W silniku <strong>Unreal</strong> zaobserwowano znaczne skoki czasów klatek podczas kulminacji kolizji obiektów." : "Analysis of extreme render delays (1% Low) demonstrated the highest stability in the <strong>Unity</strong> environment, where maximum stutters remained within acceptable limits. The <strong>Godot</strong> engine achieved comparable stability on lower-end hardware. Significant frametime spikes were observed in <strong>Unreal</strong> during peak object collisions."))
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg czasów klatek - Stanowisko A i B" : "Frametime progression - Test Rig A and B"))</h5>
+                    <div class="videos-grid" style="grid-template-columns: 1fr 1fr;">
+                        <img src="/img/thesis/frametime_a.png" alt="Frametime Stanowisko A" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_a.png", "Frametime Stanowisko A")' />
+                        <img src="/img/thesis/frametime_b.png" alt="Frametime Stanowisko B" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_b.png", "Frametime Stanowisko B")' />
+                    </div>
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg czasów klatek w czasie potwierdza, że zderzenia masowe generują największe obciążenie obliczeniowe w środowisku <strong>Unreal</strong>. <strong>Unity</strong> oraz <strong>Godot</strong> utrzymały znacznie bardziej wyrównany profil opóźnień. Wybór interfejsu <strong>Vulkan</strong> pozwolił zredukować pojedyncze szczyty opóźnień w silniku <strong>Godot</strong>." : "The frametime progression over time confirms that mass collisions generate the highest computational load in <strong>Unreal</strong>. <strong>Unity</strong> and <strong>Godot</strong> maintained a significantly more consistent latency profile. Selecting the <strong>Vulkan</strong> API reduced individual latency spikes in <strong>Godot</strong>."))
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Alokacja pamięci operacyjnej (RAM)" : "RAM Allocation"))</h5>
+                    <img src="/img/thesis/ram_b_akwarium.png" alt="RAM Akwarium" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/ram_b_akwarium.png", "RAM Akwarium")' />
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza przebiegu alokacji pamięci operacyjnej (<strong>RAM</strong>) w czasie wskazuje, że gospodarka pamięcią w silnikach <strong>Godot</strong> oraz <strong>Unity</strong> jest relatywnie stabilna – po początkowej alokacji przebiegi mają charakter wolno narastający wraz z generowaniem kolejnych fal obiektów. Z kolei silnik <strong>Unreal Engine</strong> odznacza się znacznie wyższym bazowym zapotrzebowaniem na pamięć operacyjną oraz zauważalnymi wahaniami jej wykorzystania w trakcie trwania całej symulacji." : "Analysis of operational memory (<strong>RAM</strong>) allocation over time indicates that memory management in <strong>Godot</strong> and <strong>Unity</strong> is relatively stable—after initial allocation, the plots display a slowly ascending trend as successive object waves are generated. Conversely, <strong>Unreal Engine</strong> is characterized by a significantly higher baseline memory requirement and noticeable usage fluctuations throughout the simulation."))
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="fox-results">
+            <h3 class="tech-card-title">
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki - Animowane modele (Lisy)" : "Results - Animated Models (Foxes)"))
+            </h3>
+            <div class="tech-card-body">
+                
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnia liczba klatek na sekundę (FPS)" : "Average FPS"))</h5>
+                    <img src="/img/thesis/fps_srednia_lisy.png" alt="FPS Lisy" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/fps_srednia_lisy.png", "FPS Lisy")' />
+                    <p style=" margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "W teście wielokrotnych, animowanych modeli szkieletowych, przy mniejszych obciążeniach ponownie triumfuje <strong>Godot</strong>. <strong>Unity</strong> plasuje się stabilnie pośrodku stawki. Warto jednak zauważyć kluczowy moment przy ekstremalnym nasileniu obiektów (ponad tysiąc lisów). Wówczas to <strong>Unreal Engine</strong> wykazuje najlepszą zdolność skalowania, ponieważ jego złożone algorytmy dystrybucji pracy lepiej radzą sobie z ogromnymi spadkami płynności niż konkurenci." : "In the multiple animated skeletal models test, <strong>Godot</strong> triumphs again at lower loads. <strong>Unity</strong> is stably positioned in the middle. However, it's crucial to note the breaking point at extreme object saturation (over a thousand foxes). Under such conditions, <strong>Unreal Engine</strong> demonstrates the best scaling capability, as its complex workload distribution algorithms handle severe fluidity drops better than competitors."))
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnie obciążenie zasobów przy renderowaniu animacji" : "Average Resources Load for Animation Rendering"))</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
+                            <thead style="background-color: #f1f5f9;">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">Silnik</th>
+                                    <th colspan="3">Stanowisko A (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                    <th colspan="3">Stanowisko B (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                </tr>
+                                <tr>
+                                    <th>RAM [MB]</th>
+                                    <th>CPU [%]</th>
+                                    <th>GPU [%]</th>
+                                    <th>RAM [MB]</th>
+                                    <th>CPU [%]</th>
+                                    <th>GPU [%]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Godot</strong></td>
+                                    <td><span style="color: #16a34a;">331</span> / <span style="color: #dc2626;">412</span></td>
+                                    <td><span style="color: #16a34a;">17,2</span> / <span style="color: #dc2626;">18,2</span></td>
+                                    <td><span style="color: #16a34a;">31,3</span> / <span style="color: #dc2626;">32,6</span></td>
+                                    <td><span style="color: #16a34a;">318</span> / <span style="color: #dc2626;">424</span></td>
+                                    <td><span style="color: #16a34a;">16,4</span> / <span style="color: #dc2626;">11,6</span></td>
+                                    <td><span style="color: #16a34a;">16,1</span> / <span style="color: #dc2626;">34,3</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unity</strong></td>
+                                    <td><span style="color: #16a34a;">1075</span> / <span style="color: #dc2626;">976</span></td>
+                                    <td><span style="color: #16a34a;">33,9</span> / <span style="color: #dc2626;">35,5</span></td>
+                                    <td><span style="color: #16a34a;">53,7</span> / <span style="color: #dc2626;">66,6</span></td>
+                                    <td><span style="color: #16a34a;">893</span> / <span style="color: #dc2626;">993</span></td>
+                                    <td><span style="color: #16a34a;">32,5</span> / <span style="color: #dc2626;">26,3</span></td>
+                                    <td><span style="color: #16a34a;">47,1</span> / <span style="color: #dc2626;">66,9</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unreal</strong></td>
+                                    <td><span style="color: #16a34a;">1776</span> / <span style="color: #dc2626;">1950</span></td>
+                                    <td><span style="color: #16a34a;">41,5</span> / <span style="color: #dc2626;">76,5</span></td>
+                                    <td><span style="color: #16a34a;">68,7</span> / <span style="color: #dc2626;">73,9</span></td>
+                                    <td><span style="color: #16a34a;">1741</span> / <span style="color: #dc2626;">1975</span></td>
+                                    <td><span style="color: #16a34a;">40,5</span> / <span style="color: #dc2626;">20,7</span></td>
+                                    <td><span style="color: #16a34a;">67,9</span> / <span style="color: #dc2626;">76,8</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średni czas dodawania obiektów do sceny [ms]" : "Average object instantiation time [ms]"))</h5>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+<div class="table-responsive" style="margin-bottom: 20px;">
+<table class="table table-bordered table-striped" style="color: #334155; text-align: center; font-size: 0.85rem; width: 100%;">
+    <thead style="background-color: #f1f5f9;">
+        <tr>
+            <th rowspan="3" style="vertical-align: middle;">Silnik</th>
+            <th colspan="7">Stanowisko A (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+        </tr>
+        <tr>
+            <th colspan="7" style="font-weight: 600; color: #334155;">Liczba obiektów w scenie</th>
+        </tr>
+        <tr>
+            <th>16</th><th>32</th><th>64</th><th>128</th><th>256</th><th>512</th><th>1024</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><strong>Godot</strong></td>
+        <td><span style="color: #16a34a;">7,2</span> / <span style="color: #dc2626;">5,2</span></td>
+        <td><span style="color: #16a34a;">11,8</span> / <span style="color: #dc2626;">9,9</span></td>
+        <td><span style="color: #16a34a;">26,3</span> / <span style="color: #dc2626;">19,0</span></td>
+        <td><span style="color: #16a34a;">45,0</span> / <span style="color: #dc2626;">37,5</span></td>
+        <td><span style="color: #16a34a;">93,6</span> / <span style="color: #dc2626;">75,4</span></td>
+        <td><span style="color: #16a34a;">189,9</span> / <span style="color: #dc2626;">151,9</span></td>
+        <td><span style="color: #16a34a;">387,5</span> / <span style="color: #dc2626;">310,5</span></td>
+    </tr>
+    <tr>
+        <td><strong>Unity</strong></td>
+        <td><span style="color: #16a34a;">7,6</span> / <span style="color: #dc2626;">6,0</span></td>
+        <td><span style="color: #16a34a;">7,2</span> / <span style="color: #dc2626;">7,9</span></td>
+        <td><span style="color: #16a34a;">14,3</span> / <span style="color: #dc2626;">14,2</span></td>
+        <td><span style="color: #16a34a;">28,5</span> / <span style="color: #dc2626;">28,2</span></td>
+        <td><span style="color: #16a34a;">57,0</span> / <span style="color: #dc2626;">56,3</span></td>
+        <td><span style="color: #16a34a;">113,9</span> / <span style="color: #dc2626;">118,0</span></td>
+        <td><span style="color: #16a34a;">234,4</span> / <span style="color: #dc2626;">233,6</span></td>
+    </tr>
+    <tr>
+        <td><strong>Unreal</strong></td>
+        <td><span style="color: #16a34a;">15,2</span> / <span style="color: #dc2626;">13,8</span></td>
+        <td><span style="color: #16a34a;">29,5</span> / <span style="color: #dc2626;">24,4</span></td>
+        <td><span style="color: #16a34a;">51,6</span> / <span style="color: #dc2626;">47,7</span></td>
+        <td><span style="color: #16a34a;">100,7</span> / <span style="color: #dc2626;">96,8</span></td>
+        <td><span style="color: #16a34a;">195,0</span> / <span style="color: #dc2626;">192,1</span></td>
+        <td><span style="color: #16a34a;">392,6</span> / <span style="color: #dc2626;">388,2</span></td>
+        <td><span style="color: #16a34a;">800,0</span> / <span style="color: #dc2626;">805,3</span></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div class="table-responsive" style="margin-bottom: 20px;">
+<table class="table table-bordered table-striped" style="color: #334155; text-align: center; font-size: 0.85rem; width: 100%;">
+    <thead style="background-color: #f1f5f9;">
+        <tr>
+            <th rowspan="3" style="vertical-align: middle;">Silnik</th>
+            <th colspan="7">Stanowisko B (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+        </tr>
+        <tr>
+            <th colspan="7" style="font-weight: 600; color: #334155;">Liczba obiektów w scenie</th>
+        </tr>
+        <tr>
+            <th>16</th><th>32</th><th>64</th><th>128</th><th>256</th><th>512</th><th>1024</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><strong>Godot</strong></td>
+        <td><span style="color: #16a34a;">2,6</span> / <span style="color: #dc2626;">2,2</span></td>
+        <td><span style="color: #16a34a;">4,7</span> / <span style="color: #dc2626;">5,1</span></td>
+        <td><span style="color: #16a34a;">8,7</span> / <span style="color: #dc2626;">7,7</span></td>
+        <td><span style="color: #16a34a;">18,4</span> / <span style="color: #dc2626;">15,4</span></td>
+        <td><span style="color: #16a34a;">35,5</span> / <span style="color: #dc2626;">30,3</span></td>
+        <td><span style="color: #16a34a;">72,9</span> / <span style="color: #dc2626;">60,7</span></td>
+        <td><span style="color: #16a34a;">148,6</span> / <span style="color: #dc2626;">124,6</span></td>
+    </tr>
+    <tr>
+        <td><strong>Unity</strong></td>
+        <td><span style="color: #16a34a;">3,1</span> / <span style="color: #dc2626;">4,4</span></td>
+        <td><span style="color: #16a34a;">3,4</span> / <span style="color: #dc2626;">3,4</span></td>
+        <td><span style="color: #16a34a;">6,2</span> / <span style="color: #dc2626;">6,0</span></td>
+        <td><span style="color: #16a34a;">11,6</span> / <span style="color: #dc2626;">11,3</span></td>
+        <td><span style="color: #16a34a;">23,5</span> / <span style="color: #dc2626;">23,1</span></td>
+        <td><span style="color: #16a34a;">45,9</span> / <span style="color: #dc2626;">43,6</span></td>
+        <td><span style="color: #16a34a;">96,0</span> / <span style="color: #dc2626;">90,6</span></td>
+    </tr>
+    <tr>
+        <td><strong>Unreal</strong></td>
+        <td><span style="color: #16a34a;">6,9</span> / <span style="color: #dc2626;">7,2</span></td>
+        <td><span style="color: #16a34a;">12,1</span> / <span style="color: #dc2626;">12,7</span></td>
+        <td><span style="color: #16a34a;">23,1</span> / <span style="color: #dc2626;">25,4</span></td>
+        <td><span style="color: #16a34a;">45,3</span> / <span style="color: #dc2626;">47,9</span></td>
+        <td><span style="color: #16a34a;">90,9</span> / <span style="color: #dc2626;">93,4</span></td>
+        <td><span style="color: #16a34a;">184,0</span> / <span style="color: #dc2626;">182,0</span></td>
+        <td><span style="color: #16a34a;">373,3</span> / <span style="color: #dc2626;">375,0</span></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+                <div class="mb-4">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza ładowania tysięcy unikalnych obiektów" : "Analysis of Loading Thousands of Unique Objects"))</h5>
+                    <img src="/img/thesis/unikalne_obiekty_z_wartosciami.png" alt="Obiekty" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/unikalne_obiekty_z_wartosciami.png", "Obiekty")' />
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Test dynamicznego instancjonowania obiektów wskazuje na zdecydowaną przewagę środowiska <strong>Unity</strong>, które najszybciej przetwarzało seryjne dodawanie elementów do sceny. Silnik <strong>Godot</strong> zajął drugie miejsce z czasami wyższymi o 35–60%. Najdłuższy czas instancjonowania odnotowano w <strong>Unreal Engine</strong> ze względu na wyższy narzut inicjalizacji komponentów." : "The dynamic object instantiation test highlights a clear advantage for <strong>Unity</strong>, which processed batch object insertion fastest. <strong>Godot</strong> ranked second with times 35–60% higher. The longest instantiation durations occurred in <strong>Unreal Engine</strong> due to higher component initialization overhead."))
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="map-results">
+            <h3 class="tech-card-title">
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki - Złożona scena 3D (Mapa)" : "Results - Complex 3D Scene (Map)"))
+            </h3>
+            <div class="tech-card-body">
+                
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Płynność działania sceny 3D (FPS)" : "3D Scene Fluidity (FPS)"))</h5>
+                    <img src="/img/thesis/mapa_fps.png" alt="FPS Mapa" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/mapa_fps.png", "FPS Mapa")' />
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "W złożonym środowisku 3D z ukształtowaniem terenu i roślinnością różnice wydajnościowe uległy wyrównaniu. <strong>Unity</strong> oraz <strong>Unreal Engine</strong> uzyskały zbliżone, wysokie wartości klatek na sekundę na wydajniejszym stanowisku. <strong>Godot</strong> odnotował niższy poziom płynności w scenie o wysokim skomplikowaniu geometrii." : "In the complex 3D environment featuring terrain and vegetation, performance differences leveled out. <strong>Unity</strong> and <strong>Unreal Engine</strong> achieved comparable high framerates on high-end hardware. <strong>Godot</strong> recorded lower fluidity in scenes with high geometric complexity."))
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnie obciążenie zasobów na mapie 3D" : "Average Resources Load on 3D Map"))</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
+                            <thead style="background-color: #f1f5f9;">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">Silnik</th>
+                                    <th colspan="3">Stanowisko A (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                    <th colspan="3">Stanowisko B (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+                                </tr>
+                                <tr>
+                                    <th>RAM [MB]</th>
+                                    <th>VRAM [MB]</th>
+                                    <th>GPU [%]</th>
+                                    <th>RAM [MB]</th>
+                                    <th>VRAM [MB]</th>
+                                    <th>GPU [%]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Godot</strong></td>
+                                    <td><span style="color: #16a34a;">754</span> / <span style="color: #dc2626;">945</span></td>
+                                    <td><span style="color: #16a34a;">1652</span> / <span style="color: #dc2626;">1159</span></td>
+                                    <td><span style="color: #16a34a;">87,4</span> / <span style="color: #dc2626;">98,9</span></td>
+                                    <td><span style="color: #16a34a;">652</span> / <span style="color: #dc2626;">964</span></td>
+                                    <td><span style="color: #16a34a;">1866</span> / <span style="color: #dc2626;">1264</span></td>
+                                    <td><span style="color: #16a34a;">87,8</span> / <span style="color: #dc2626;">93,3</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unity</strong></td>
+                                    <td><span style="color: #16a34a;">1818</span> / <span style="color: #dc2626;">2354</span></td>
+                                    <td><span style="color: #16a34a;">4861</span> / <span style="color: #dc2626;">5266</span></td>
+                                    <td><span style="color: #16a34a;">97,6</span> / <span style="color: #dc2626;">99,3</span></td>
+                                    <td><span style="color: #16a34a;">1660</span> / <span style="color: #dc2626;">2496</span></td>
+                                    <td><span style="color: #16a34a;">4994</span> / <span style="color: #dc2626;">5353</span></td>
+                                    <td><span style="color: #16a34a;">95,7</span> / <span style="color: #dc2626;">99,0</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unreal</strong></td>
+                                    <td><span style="color: #16a34a;">1810</span> / <span style="color: #dc2626;">2002</span></td>
+                                    <td><span style="color: #16a34a;">3566</span> / <span style="color: #dc2626;">4069</span></td>
+                                    <td><span style="color: #16a34a;">99,9</span> / <span style="color: #dc2626;">98,0</span></td>
+                                    <td><span style="color: #16a34a;">1876</span> / <span style="color: #dc2626;">2105</span></td>
+                                    <td><span style="color: #16a34a;">3775</span> / <span style="color: #dc2626;">4126</span></td>
+                                    <td><span style="color: #16a34a;">98,7</span> / <span style="color: #dc2626;">94,4</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Złożoność sceny statycznej doprowadziła do pełnego wykorzystania układów <strong>GPU</strong> we wszystkich silnikach. Środowisko <strong>Unity</strong> wykazało najwyższe zużycie pamięci <strong>VRAM</strong>. Silnik <strong>Godot</strong> utrzymał najniższą alokację pamięci operacyjnej i graficznej na obu stanowiskach pomiarowych." : "Static scene complexity resulted in maximum <strong>GPU</strong> utilization across all engines. The <strong>Unity</strong> environment exhibited the highest <strong>VRAM</strong> consumption. The <strong>Godot</strong> engine maintained the lowest system and graphics memory allocation across both test rigs."))
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Czas ładowania obiektów mapy [ms]" : "Map Objects Loading Time [ms]"))</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
+    <thead style="background-color: #f1f5f9;">
+        <tr>
+            <th>Silnik</th>
+            <th>Stanowisko A (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+            <th>Stanowisko B (<span style="color: #16a34a;">DX12</span> / <span style="color: #dc2626;">Vulkan</span>)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Godot</strong></td>
+            <td><span style="color: #16a34a;">3942,7</span> / <span style="color: #dc2626;">3925,0</span></td>
+            <td><span style="color: #16a34a;">1695,2</span> / <span style="color: #dc2626;">1667,3</span></td>
+        </tr>
+        <tr>
+            <td><strong>Unity</strong></td>
+            <td><span style="color: #16a34a;">544,5</span> / <span style="color: #dc2626;">508,8</span></td>
+            <td><span style="color: #16a34a;">391,9</span> / <span style="color: #dc2626;">364,5</span></td>
+        </tr>
+        <tr>
+            <td><strong>Unreal</strong></td>
+            <td><span style="color: #16a34a;">190,3</span> / <span style="color: #dc2626;">186,4</span></td>
+            <td><span style="color: #16a34a;">104,3</span> / <span style="color: #dc2626;">107,9</span></td>
+        </tr>
+    </tbody>
+</table>
+                    </div>
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Najkrótszy czas przygotowania zasobów mapy uzyskał <strong>Unreal Engine</strong> dzięki wykorzystaniu natywnej struktury <strong>Data Table</strong>. <strong>Unity</strong> uplasowało się na drugim miejscu, natomiast <strong>Godot</strong> potrzebował znacznie więcej czasu ze względu na asynchroniczne parsowanie danych z plików <strong>CSV</strong>." : "The shortest resource preparation time for the map was achieved by <strong>Unreal Engine</strong> using its native <strong>Data Table</strong> structure. <strong>Unity</strong> placed second, while <strong>Godot</strong> required substantially more time due to line-by-line <strong>CSV</strong> parsing."))
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg kamery po waypointach w czasie" : "Camera progression along waypoints over time"))</h5>
+                    <div class="videos-grid" style="grid-template-columns: 1fr 1fr;">
+                        <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png" alt="Frametime Mapa A" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png", "Frametime Mapa A")' />
+                        <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png" alt="Frametime Mapa B" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png", "Frametime Mapa B")' />
+                    </div>
+                    <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
+                        @((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg opóźnień podczas ruchu kamery wykazuje najniższą zmienność w silniku <strong>Unity</strong>, co świadczy o sprawnej optymalizacji buforowania geometrii i tekstur. Środowisko <strong>Unreal</strong> wykazało sporadyczne skoki opóźnień podczas doczytywania sektorów mapy, podczas gdy <strong>Godot</strong> utrzymywał szerszą wstęgę wahań czasów klatek." : "Latency progression during camera movement reveals the lowest variability in <strong>Unity</strong>, reflecting efficient geometry and texture streaming optimization. The <strong>Unreal</strong> environment displayed sporadic latency spikes during sector loading, while <strong>Godot</strong> maintained a wider frametime fluctuation band."))
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="conclusions">
+            <h3 class="tech-card-title">
+                @((MarkupString)(State.CurrentLanguage == "PL" ? "Wnioski i podsumowanie" : "Conclusions and Summary"))
+            </h3>
+            <div class="tech-card-body">
+                <p style="text-indent: 1.5em; text-align: justify;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Zgromadzony materiał badawczy wykazał, że żadne z testowanych środowisk nie może zostać uznane za uniwersalnie najwydajniejsze. Silnik <strong>Godot</strong> osiągał najwyższą średnią liczbę klatek na sekundę w scenariuszach fizyki oraz modeli animowanych, charakteryzując się najniższym zapotrzebowaniem na pamięć operacyjną (<strong>RAM</strong>) i graficzną (<strong>VRAM</strong>). <strong>Unity</strong> uzyskiwało zwykle wyniki pośrednie pod względem płynności, jednak wyróżniało się bardzo dobrą stabilnością czasów klatek i krótkim czasem dodawania obiektów. <strong>Unreal</strong> cechował się najwyższym narzutem pamięciowym, jednak w złożonej scenie 3D (Mapa) dogonił <strong>Unity</strong> pod względem wydajności, a dzięki zastosowaniu struktury <strong>Data Table</strong> osiągnął najszybsze wczytywanie." : "The collected research material showed that none of the tested environments can be considered universally the most efficient. <strong>Godot</strong> achieved the highest average framerate in physics and animated models scenarios, characterized by the lowest memory consumption (<strong>RAM</strong> and <strong>VRAM</strong>). <strong>Unity</strong> generally obtained intermediate fluidity results, but stood out with excellent frametime stability and fast object instantiation. <strong>Unreal</strong> was characterized by the highest memory overhead, yet in the complex 3D scene (Map) it matched <strong>Unity</strong>'s performance and achieved the fastest loading thanks to the <strong>Data Table</strong> structure."))
+                </p>
+                <p style="text-indent: 1.5em; text-align: justify;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Istotnym czynnikiem był również wybór interfejsu graficznego. Zmiana z <strong>DirectX 12</strong> na <strong>Vulkan</strong> często przynosiła korzyści w <strong>Godot</strong> i <strong>Unity</strong>, podczas gdy w <strong>Unreal</strong> prowadziła miejscami do spadku wydajności. Badania potwierdziły, że różne typy scen eksponują odmienne mocne i słabe strony silników – np. środowiska dobrze radzące sobie z prostą logiką mogą gorzej skalować się w bardzo złożonych wizualnie projektach, i vice versa." : "The choice of graphics API was also a significant factor. Switching from <strong>DirectX 12</strong> to <strong>Vulkan</strong> often benefited <strong>Godot</strong> and <strong>Unity</strong>, whereas in <strong>Unreal</strong> it sometimes led to decreased performance. The tests confirmed that different scene types expose distinct engine strengths and weaknesses—e.g., engines handling simple logic well might scale poorer in highly visually complex projects, and vice versa."))
+                </p>
             </div>
         </div>
     </ChildContent>
 </SharedLayout>
 
+
+
+
+
 @code {
+    private bool showLongDescription = true;
+    private bool _showLongDescAquarium = true;
+    private bool _showLongDescFox = true;
+    private bool _showLongDescMap = true;
+
+    private void ToggleDescriptionLength()
+    {
+        showLongDescription = !showLongDescription;
+    }
+
+    
+
     protected override void OnInitialized()
     {
         State.TurnOffFilter();

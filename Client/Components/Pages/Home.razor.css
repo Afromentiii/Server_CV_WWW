@@ -19,20 +19,20 @@
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    padding: 24px 40px; /* Dodajemy większy oddech od krawędzi ekranu */
+    padding: 24px 40px; 
     box-sizing: border-box;
 }
 
-/* STYLIZACJA HERO SECTION */
+
 .hero-section {
     text-align: center;
-    margin-bottom: 48px; /* Odstęp między tekstem a kafelkami */
+    margin-bottom: 48px; 
 }
 
 .hero-title {
     font-family: "Archivo Black", sans-serif;
     font-size: 2.8rem;
-    color: #0f172a; /* Głęboki, nowoczesny ciemny kolor */
+    color: #0f172a; 
     margin: 0 0 8px 0;
     letter-spacing: -1px;
 }
@@ -41,16 +41,16 @@
 .nav-tile span {
     font-family: "Archivo Black", sans-serif;
     font-size: 0.9rem;
-    letter-spacing: 1px;       /* Rozstrzelenie liter, daje bardzo nowoczesny look */
-    text-transform: uppercase; /* Wymusza wielkie litery, niezależnie od tego co wpiszesz w HTML */
+    letter-spacing: 1px;       
+    text-transform: uppercase; 
     
-    /* Płynne przejście koloru i poświaty przy najechaniu myszką */
+    
     transition: color 0.25s ease, text-shadow 0.25s ease; 
 }
 
 .nav-tile {
-    -webkit-user-select: none; /* Wsparcie dla Safari na macOS i iOS */
-    -ms-user-select: none;      /* Wsparcie dla starszych wersji Edge/IE */
+    -webkit-user-select: none; 
+    -ms-user-select: none;      
     user-select: none;
 
     font-family: "Archivo Black", sans-serif;
@@ -58,46 +58,47 @@
     font-style: normal;
 
     display: flex;
-    flex-direction: column; /* Pozwala na ładne układanie ikona + tekst w pionie */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     width: 360px; 
-    height: 260px; /* Stała wysokość nadaje kafelkom stabilny kształt boksów */
+    height: 260px; 
     
     background-color: #ffffff;
-    border: 1px solid #e2e8f0; /* Subtelna, jasnoszara ramka zamiast ciężkiej czerni */
-    border-radius: 16px; /* Nowoczesne, łagodne zaokrąglenie rogów */
+    border: 1px solid #e2e8f0; 
+    border-radius: 16px; 
     
     font-size: 1.2rem;
-    font-weight: 500; /* Inter wygląda najlepiej przy średniej grubości */
-    color: #1e293b; /* Głęboki grafit zamiast męczącej oczy czerni */
+    font-weight: 500; 
+    color: #1e293b; 
     cursor: pointer;
     
-    /* Płynne przejście dla wszystkich efektów hover */
+    
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
                 box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
                 border-color 0.2s ease;
     
-    /* Delikatny, wielowarstwowy cień nadający głębię (tzw. Soft UI) */
+    
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
                 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
-/* --- EFEKT PO NAJECHANIU (Uniesienie kafelka) --- */
+
 .nav-tile:hover {
-    transform: translateY(-6px); /* Fizyczne uniesienie kafelka do góry */
-    border-color: #3b82f6; /* Ramka zmienia kolor na akcent z selektora języków */
+    transform: translateY(-6px); 
+    border-color: #3b82f6; 
     color: #3b82f6;
     
-    /* Cieplejszy, bardziej rozproszony cień podczas hoveru */
+    
     box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 
                 0 10px 10px -5px rgba(59, 130, 246, 0.04);
 }
 
-/* --- EFEKT KLIKNIĘCIA (Ugięcie) --- */
+
 .nav-tile:active {
     transform: translateY(-2px) scale(0.98);
 }
+
 
 
 

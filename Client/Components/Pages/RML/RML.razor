@@ -6,26 +6,72 @@
 <SharedLayout currentProject=ProjectService.GetProjects().ElementAt(1)>
     <TableOfContents>
         <div class="toc-item" onclick="window.scrollToElement('movie-section')">
-            @(State.CurrentLanguage == "PL" ? "Prezentacja wideo" : "Video Showcase")
+            @(State.CurrentLanguage == "PL" ? "Prezentacja i projekt" : "Showcase and project")
         </div>
     </TableOfContents>
 
     <ChildContent>
         <div class="tech-card hide-card" id="movie-section">
             <h3 class="tech-card-title">
-                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo" : "Video Showcase")
+                @(State.CurrentLanguage == "PL" ? "Prezentacja, opis i badania" : "Showcase, description and research")
             </h3>
-            <div class="tech-card-body" style="text-align: center;">
-                <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <source src="/images/movies/rml_hamsters.webm" type="video/webm" />
-                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-                </video>
+            <div class="tech-card-body">
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <video controls autoplay loop muted style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <source src="/images/movies/rml_hamsters.webm" type="video/webm" />
+                        Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+                    </video>
+                </div>
+
+                <div class="description-container" style="text-align: left; margin-bottom: 2rem;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 style="margin: 0; color: #fff;">@(State.CurrentLanguage == "PL" ? "Opis z pracy dyplomowej" : "Thesis Description")</h4>
+                        <div>
+                            <button class="btn btn-sm @(_showLongDescription ? "btn-outline-primary" : "btn-primary") me-2" @onclick="() => _showLongDescription = false">
+                                @(State.CurrentLanguage == "PL" ? "Krótka wersja" : "Short version")
+                            </button>
+                            <button class="btn btn-sm @(_showLongDescription ? "btn-primary" : "btn-outline-primary")" @onclick="() => _showLongDescription = true">
+                                @(State.CurrentLanguage == "PL" ? "Długa wersja" : "Long version")
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="description-content p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px;">
+                        @if (!_showLongDescription)
+                        {
+                            <p class="mb-0"><i>[Tutaj wklej krótką wersję tekstu z pracy / Paste short version of thesis text here]</i></p>
+                        }
+                        else
+                        {
+                            <p class="mb-0"><i>[Tutaj wklej długą wersję tekstu z pracy / Paste long version of thesis text here]</i></p>
+                        }
+                    </div>
+                </div>
+
+                <div class="research-container" style="text-align: left;">
+                    <h4 class="mb-3" style="color: #fff;">@(State.CurrentLanguage == "PL" ? "Część badawcza" : "Research Part")</h4>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center mb-3 mb-md-0">
+                            <img src="/img/thesis/placeholder_chart.png" alt="Wykres z części badawczej" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+                            <p class="text-muted mt-2 mb-0"><small>[Wykres / Chart placeholder]</small></p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="research-summary p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px; height: 100%;">
+                                <p class="mb-0"><i>[Tutaj wklej skrócone podsumowanie z części badawczej / Paste shortened research summary here]</i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </ChildContent>
 </SharedLayout>
 
 @code {
+    private bool _showLongDescription = false;
+
     protected override void OnInitialized()
     {
         State.TurnOffFilter();
