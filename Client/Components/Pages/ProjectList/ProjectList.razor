@@ -7,7 +7,7 @@
     <div class="projects-list">
         @foreach (var project in FilteredProjects)
         {
-            <div class="project-card" @onclick="() => ChangePage(project.Page)">
+            <div class="project-card" @onclick="() => ChangePage(project)">
                 <div class="project-title-section">
                     <h3>@(State.CurrentLanguage == "PL" ? project.TitlePL : project.TitleEN)</h3>
                 </div>
@@ -61,10 +61,14 @@
     }
     public void Dispose() => State.OnChange -= StateHasChanged;
 
-    private void ChangePage(string page)
+    private void ChangePage(ProjectModel project)
     {
         State.IsShowingFilter = false;
         State.IsFilterMenuOpen = false;
-        Navigation.NavigateTo(page);
+        string target = !string.IsNullOrWhiteSpace(project.Page) ? project.Page : project.GithubLink;
+        if (!string.IsNullOrWhiteSpace(target))
+        {
+            Navigation.NavigateTo(target, forceLoad: target.StartsWith("http"));
+        }
     }
 }

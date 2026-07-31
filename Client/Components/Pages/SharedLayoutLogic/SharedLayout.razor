@@ -122,10 +122,9 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await JS.InvokeVoidAsync("observeElements", ".tech-card", 0.01);
         if (firstRender)
         {
-            await JS.InvokeVoidAsync("observeElements", ".tech-card", 0.01);
-            
             TitleClass = "title-animate";
             StateHasChanged();
         }
