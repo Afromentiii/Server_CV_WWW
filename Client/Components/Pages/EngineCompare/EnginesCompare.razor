@@ -283,7 +283,7 @@
             <div class="tech-card-body">
                 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnia liczba klatek na sekundę (FPS)" : "Average FPS"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnia liczba klatek na sekundę (FPS)" : "Average FPS"))</h5>
                     <img src="/img/thesis/fps_srednia_akwarium.png" alt="FPS Akwarium" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/fps_srednia_akwarium.png", "FPS Akwarium")' />
                     <p style=" margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "Wykres przedstawia zdecydowaną dominację silnika <strong>Godot</strong> w płynności symulacji setek spadających sześcianów (osiągając ponad 800 FPS na platformie High-end). <strong>Unity</strong> zajęło stabilne drugie miejsce z zauważalnie niższym klatkażem. <strong>Unreal Engine</strong> natomiast zmagał się z potężnym narzutem obliczeniowym swojego zaawansowanego silnika fizyki Chaos, generując znaczne opóźnienia przy tak masywnych kolizjach wieloobiektowych." : "The chart illustrates <strong>Godot</strong>'s clear dominance in simulating thousands of falling cubes, achieving over 800 FPS on high-end hardware. <strong>Unity</strong> took a stable second place with noticeably lower fluidity. <strong>Unreal Engine</strong> struggled with the immense computational overhead of its advanced Chaos physics subsystem, generating significant delays with such massive multi-object collisions."))
@@ -291,7 +291,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Zbiorcze zestawienie średniego obciążenia zasobów sprzętowych" : "Hardware Resources Load Summary"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Zbiorcze zestawienie średniego obciążenia zasobów sprzętowych" : "Hardware Resources Load Summary"))</h5>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
                             <thead style="background-color: #f1f5f9;">
@@ -346,7 +346,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Zestawienie najdłuższych klatek oraz średniej z 1% Low [ms]" : "Longest frames and 1% Low average [ms]"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Zestawienie najdłuższych klatek oraz średniej z 1% Low [ms]" : "Longest frames and 1% Low average [ms]"))</h5>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
                             <thead style="background-color: #f1f5f9;">
@@ -393,7 +393,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg czasów klatek - Stanowisko A i B" : "Frametime progression - Test Rig A and B"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg czasów klatek - Stanowisko A i B" : "Frametime progression - Test Rig A and B"))</h5>
                     <div class="videos-grid" style="grid-template-columns: 1fr 1fr;">
                         <img src="/img/thesis/frametime_a.png" alt="Frametime Stanowisko A" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_a.png", "Frametime Stanowisko A")' />
                         <img src="/img/thesis/frametime_b.png" alt="Frametime Stanowisko B" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_b.png", "Frametime Stanowisko B")' />
@@ -404,7 +404,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Alokacja pamięci operacyjnej (RAM)" : "RAM Allocation"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Alokacja pamięci operacyjnej (RAM)" : "RAM Allocation"))</h5>
                     <img src="/img/thesis/ram_b_akwarium.png" alt="RAM Akwarium" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/ram_b_akwarium.png", "RAM Akwarium")' />
                     <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza przebiegu alokacji pamięci operacyjnej (<strong>RAM</strong>) w czasie wskazuje, że gospodarka pamięcią w silnikach <strong>Godot</strong> oraz <strong>Unity</strong> jest relatywnie stabilna – po początkowej alokacji przebiegi mają charakter wolno narastający wraz z generowaniem kolejnych fal obiektów. Z kolei silnik <strong>Unreal Engine</strong> odznacza się znacznie wyższym bazowym zapotrzebowaniem na pamięć operacyjną oraz zauważalnymi wahaniami jej wykorzystania w trakcie trwania całej symulacji." : "Analysis of operational memory (<strong>RAM</strong>) allocation over time indicates that memory management in <strong>Godot</strong> and <strong>Unity</strong> is relatively stable—after initial allocation, the plots display a slowly ascending trend as successive object waves are generated. Conversely, <strong>Unreal Engine</strong> is characterized by a significantly higher baseline memory requirement and noticeable usage fluctuations throughout the simulation."))
@@ -420,7 +420,7 @@
             <div class="tech-card-body">
                 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnia liczba klatek na sekundę (FPS)" : "Average FPS"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnia liczba klatek na sekundę (FPS)" : "Average FPS"))</h5>
                     <img src="/img/thesis/fps_srednia_lisy.png" alt="FPS Lisy" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/fps_srednia_lisy.png", "FPS Lisy")' />
                     <p style=" margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "W teście wielokrotnych, animowanych modeli szkieletowych, przy mniejszych obciążeniach ponownie triumfuje <strong>Godot</strong>. <strong>Unity</strong> plasuje się stabilnie pośrodku stawki. Warto jednak zauważyć kluczowy moment przy ekstremalnym nasileniu obiektów (ponad tysiąc lisów). Wówczas to <strong>Unreal Engine</strong> wykazuje najlepszą zdolność skalowania, ponieważ jego złożone algorytmy dystrybucji pracy lepiej radzą sobie z ogromnymi spadkami płynności niż konkurenci." : "In the multiple animated skeletal models test, <strong>Godot</strong> triumphs again at lower loads. <strong>Unity</strong> is stably positioned in the middle. However, it's crucial to note the breaking point at extreme object saturation (over a thousand foxes). Under such conditions, <strong>Unreal Engine</strong> demonstrates the best scaling capability, as its complex workload distribution algorithms handle severe fluidity drops better than competitors."))
@@ -428,7 +428,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnie obciążenie zasobów przy renderowaniu animacji" : "Average Resources Load for Animation Rendering"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnie obciążenie zasobów przy renderowaniu animacji" : "Average Resources Load for Animation Rendering"))</h5>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
                             <thead style="background-color: #f1f5f9;">
@@ -480,7 +480,7 @@
                 </div>
                 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średni czas dodawania obiektów do sceny [ms]" : "Average object instantiation time [ms]"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średni czas dodawania obiektów do sceny [ms]" : "Average object instantiation time [ms]"))</h5>
                     <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
 <div class="table-responsive" style="margin-bottom: 20px;">
 <table class="table table-bordered table-striped" style="color: #334155; text-align: center; font-size: 0.85rem; width: 100%;">
@@ -582,7 +582,7 @@
 </div>
 
                 <div class="mb-4">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza ładowania tysięcy unikalnych obiektów" : "Analysis of Loading Thousands of Unique Objects"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Analiza ładowania tysięcy unikalnych obiektów" : "Analysis of Loading Thousands of Unique Objects"))</h5>
                     <img src="/img/thesis/unikalne_obiekty_z_wartosciami.png" alt="Obiekty" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/unikalne_obiekty_z_wartosciami.png", "Obiekty")' />
                     <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "Test dynamicznego instancjonowania obiektów wskazuje na zdecydowaną przewagę środowiska <strong>Unity</strong>, które najszybciej przetwarzało seryjne dodawanie elementów do sceny. Silnik <strong>Godot</strong> zajął drugie miejsce z czasami wyższymi o 35–60%. Najdłuższy czas instancjonowania odnotowano w <strong>Unreal Engine</strong> ze względu na wyższy narzut inicjalizacji komponentów." : "The dynamic object instantiation test highlights a clear advantage for <strong>Unity</strong>, which processed batch object insertion fastest. <strong>Godot</strong> ranked second with times 35–60% higher. The longest instantiation durations occurred in <strong>Unreal Engine</strong> due to higher component initialization overhead."))
@@ -598,7 +598,7 @@
             <div class="tech-card-body">
                 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Płynność działania sceny 3D (FPS)" : "3D Scene Fluidity (FPS)"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Płynność działania sceny 3D (FPS)" : "3D Scene Fluidity (FPS)"))</h5>
                     <img src="/img/thesis/mapa_fps.png" alt="FPS Mapa" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/mapa_fps.png", "FPS Mapa")' />
                     <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "W złożonym środowisku 3D z ukształtowaniem terenu i roślinnością różnice wydajnościowe uległy wyrównaniu. <strong>Unity</strong> oraz <strong>Unreal Engine</strong> uzyskały zbliżone, wysokie wartości klatek na sekundę na wydajniejszym stanowisku. <strong>Godot</strong> odnotował niższy poziom płynności w scenie o wysokim skomplikowaniu geometrii." : "In the complex 3D environment featuring terrain and vegetation, performance differences leveled out. <strong>Unity</strong> and <strong>Unreal Engine</strong> achieved comparable high framerates on high-end hardware. <strong>Godot</strong> recorded lower fluidity in scenes with high geometric complexity."))
@@ -606,7 +606,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnie obciążenie zasobów na mapie 3D" : "Average Resources Load on 3D Map"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Średnie obciążenie zasobów na mapie 3D" : "Average Resources Load on 3D Map"))</h5>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
                             <thead style="background-color: #f1f5f9;">
@@ -661,7 +661,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Czas ładowania obiektów mapy [ms]" : "Map Objects Loading Time [ms]"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Czas ładowania obiektów mapy [ms]" : "Map Objects Loading Time [ms]"))</h5>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" style="color: #334155; text-align: center; max-width: 800px; margin: 0 auto;">
     <thead style="background-color: #f1f5f9;">
@@ -696,7 +696,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <h5 style="color: #184592; font-weight: 700; margin-bottom: 15px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg kamery po waypointach w czasie" : "Camera progression along waypoints over time"))</h5>
+                    <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg kamery po waypointach w czasie" : "Camera progression along waypoints over time"))</h5>
                     <div class="videos-grid" style="grid-template-columns: 1fr 1fr;">
                         <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png" alt="Frametime Mapa A" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png", "Frametime Mapa A")' />
                         <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png" alt="Frametime Mapa B" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png", "Frametime Mapa B")' />

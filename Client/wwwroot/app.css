@@ -75,7 +75,7 @@ h1:focus {
     
     background: linear-gradient(135deg, #3c1269 0%, #184592 100%);
     padding: 60px 20px; 
-    display: flex;
+        display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -93,6 +93,15 @@ h1:focus {
     text-align: center;
 }
 
+.gradient-text-title {
+    font-weight: 800;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #3c1269 0%, #184592 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #3c1269;
+}
 
 @media (max-width: 768px) {
     .wavy-container {
