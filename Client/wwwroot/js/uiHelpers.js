@@ -33,31 +33,7 @@ window.observeElements = (selector, threshold = 0.05) => {
         elements.forEach(el => observer.observe(el));
     };
 
-    const mediaElements = [
-        ...Array.from(document.images).filter(img => !img.complete),
-        ...Array.from(document.querySelectorAll('video')).filter(vid => vid.readyState === 0)
-    ];
-
-    if (mediaElements.length > 0) {
-        let loadedCount = 0;
-        const onMediaLoad = () => {
-            loadedCount++;
-            if (loadedCount === mediaElements.length) {
-                setTimeout(setupObserver, 50);
-            }
-        };
-        mediaElements.forEach(media => {
-            if (media.tagName.toLowerCase() === 'img') {
-                media.addEventListener('load', onMediaLoad, { once: true });
-                media.addEventListener('error', onMediaLoad, { once: true });
-            } else if (media.tagName.toLowerCase() === 'video') {
-                media.addEventListener('loadedmetadata', onMediaLoad, { once: true });
-                media.addEventListener('error', onMediaLoad, { once: true });
-            }
-        });
-    } else {
-        setTimeout(setupObserver, 50);
-    }
+    setTimeout(setupObserver, 50);
 };
 
 window.setLanguageCookie = (lang) => {
