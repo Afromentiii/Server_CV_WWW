@@ -55,7 +55,11 @@
 
     <ImageModal IsOpen="State.IsImageModalOpen" ImageSrc="@State.CurrentModalImageSrc" ImageAlt="@State.CurrentModalImageAlt" OnClose="State.CloseImageModal" />
 
-    <footer class="footer"></footer>
+    <footer class="footer">
+        <p style="text-align: center; font-size: 0.85em; color: #a0aec0; margin: 10px 0; padding: 10px;">
+            @(State.CurrentLanguage == "PL" ? "Ta strona wykorzystuje pliki cookie wyłącznie w celu zapamiętania wybranego języka." : "This site uses cookies solely to remember your language preference.")
+        </p>
+    </footer>
 </div>
 
 @code 

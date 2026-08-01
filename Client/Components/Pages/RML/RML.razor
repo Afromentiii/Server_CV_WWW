@@ -6,14 +6,32 @@
 <SharedLayout currentProject=ProjectService.GetProjects().ElementAt(1)>
     <TableOfContents>
         <div class="toc-item" onclick="window.scrollToElement('movie-section')">
-            @(State.CurrentLanguage == "PL" ? "Prezentacja i projekt" : "Showcase and project")
+            @(State.CurrentLanguage == "PL" ? "Prezentacja i algorytm" : "Showcase and algorithm")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('methodology-section')">
+            @(State.CurrentLanguage == "PL" ? "Metodologia badań" : "Research Methodology")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('level0-section')">
+            @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 0" : "Results - Level 0")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('level1-section')">
+            @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 1" : "Results - Level 1")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('level2-section')">
+            @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 2" : "Results - Level 2")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('level3-section')">
+            @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 3" : "Results - Level 3")
+        </div>
+        <div class="toc-item" onclick="window.scrollToElement('summary-section')">
+            @(State.CurrentLanguage == "PL" ? "Podsumowanie" : "Summary")
         </div>
     </TableOfContents>
 
     <ChildContent>
         <div class="tech-card hide-card" id="movie-section">
             <h3 class="tech-card-title">
-                @(State.CurrentLanguage == "PL" ? "Prezentacja, opis i badania" : "Showcase, description and research")
+                @(State.CurrentLanguage == "PL" ? "Prezentacja wideo i algorytm" : "Video showcase and algorithm")
             </h3>
             <div class="tech-card-body">
                 
@@ -26,13 +44,10 @@
 
                 <div class="description-container" style="text-align: left; margin-bottom: 2rem;">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h4 style="margin: 0; color: #fff;">@(State.CurrentLanguage == "PL" ? "Opis z pracy dyplomowej" : "Thesis Description")</h4>
+                        <h4 style="margin: 0; color: #fff;">@(State.CurrentLanguage == "PL" ? "Zasada działania algorytmu" : "Algorithm Mechanism")</h4>
                         <div>
-                            <button class="btn btn-sm @(_showLongDescription ? "btn-outline-primary" : "btn-primary") me-2" @onclick="() => _showLongDescription = false">
-                                @(State.CurrentLanguage == "PL" ? "Krótka wersja" : "Short version")
-                            </button>
-                            <button class="btn btn-sm @(_showLongDescription ? "btn-primary" : "btn-outline-primary")" @onclick="() => _showLongDescription = true">
-                                @(State.CurrentLanguage == "PL" ? "Długa wersja" : "Long version")
+                            <button class="version-toggle-btn" @onclick="() => _showLongDescription = !_showLongDescription">
+                                @(_showLongDescription ? (State.CurrentLanguage == "PL" ? "Wersja: Pełna" : "Version: Full") : (State.CurrentLanguage == "PL" ? "Wersja: Skrócona" : "Version: Short"))
                             </button>
                         </div>
                     </div>
@@ -40,37 +55,186 @@
                     <div class="description-content p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px;">
                         @if (!_showLongDescription)
                         {
-                            <p class="mb-0"><i>[Tutaj wklej krótką wersję tekstu z pracy / Paste short version of thesis text here]</i></p>
+                            <p class="mb-0" style="text-indent: 1.5em; text-align: justify;">
+                                @((MarkupString)(State.CurrentLanguage == "PL" ? "Zastosowane podejście to w głównej mierze <strong>stochastyczne przeszukiwanie z nawrotami</strong>, wykorzystujące elementy algorytmu genetycznego w połączeniu z uczeniem maszynowym ze wzmocnieniem (RL). Algorytm nie ewoluuje w typowy sposób; osiąga sukces odtwarzając znaną, dobrą sekwencję ruchów, a w przypadku zgonu lub ślepego zaułka cofa się o kilka kroków i wykonuje nowe, losowe przeszukiwanie optymalizowane przez system kar i nagród." : "The applied approach is primarily <strong>stochastic backtracking search</strong>, utilizing elements of a genetic algorithm combined with reinforcement learning (RL). The algorithm does not evolve typically; it succeeds by replaying a known, good sequence of moves. Upon death or a dead end, it backtracks a few steps and performs a new, random search optimized by a reward and punishment system."))
+                            </p>
                         }
                         else
                         {
-                            <p class="mb-0"><i>[Tutaj wklej długą wersję tekstu z pracy / Paste long version of thesis text here]</i></p>
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-2">
+                                @((MarkupString)(State.CurrentLanguage == "PL" ? "Zastosowane podejście to w głównej mierze <strong>stochastyczne przeszukiwanie z nawrotami</strong>, które z powodzeniem wykorzystuje elementy algorytmu genetycznego w połączeniu z uczeniem maszynowym ze wzmocnieniem (RL)." : "The applied approach is primarily <strong>stochastic backtracking search</strong>, which successfully utilizes elements of a genetic algorithm combined with reinforcement learning (RL)."))
+                            </p>
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-2">
+                                @((MarkupString)(State.CurrentLanguage == "PL" ? "Algorytm nie ewoluuje w sposób typowy dla algorytmów genetycznych (odrzucono klasyczne krzyżowanie i mutacje). Osiąga sukces poprzez odtwarzanie znanej, dobrej sekwencji ruchów z poprzedniej iteracji, po czym, w razie potrzeby, \"cofa się\" o kilka kroków i wykonuje nowe, losowe przeszukiwanie. Dzięki stochastyczności agent potrafi się wycofać ze ślepego zaułka i sprawdzić inną trasę." : "The algorithm does not evolve in a manner typical of genetic algorithms (classic crossover and mutations were discarded). It achieves success by reproducing a known, good sequence of moves from the previous iteration, then, if necessary, it \"backtracks\" a few steps and performs a new, random search. Thanks to stochasticity, the agent can retreat from a dead end and explore another route."))
+                            </p>
+                            <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">
+                                @((MarkupString)(State.CurrentLanguage == "PL" ? "Uczenie ze wzmocnieniem występuje podczas ewaluacji ścieżki: za poprawne akcje (np. ruch i skok w odpowiednim momencie) agent otrzymuje <strong>nagrodę</strong> punktową, a w przypadku śmierci lub wpadnięcia na przeszkodę otrzymuje <strong>karę</strong>. Cały proces optymalizowany jest równolegle dla wieloosobniczej populacji i poddawany selekcji opierającej się na najlepszych znalezionych dotąd wynikach." : "Reinforcement learning occurs during path evaluation: for correct actions (e.g., moving and jumping at the right time) the agent receives a point <strong>reward</strong>, and in case of death or hitting an obstacle, it receives a <strong>penalty</strong>. The entire process is optimized in parallel for a multi-agent population and subjected to selection based on the best results found so far."))
+                            </p>
                         }
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="research-container" style="text-align: left;">
-                    <h4 class="mb-3" style="color: #fff;">@(State.CurrentLanguage == "PL" ? "Część badawcza" : "Research Part")</h4>
-                    <div class="row align-items-center">
-                        <div class="col-md-6 text-center mb-3 mb-md-0">
-                            <img src="/img/thesis/placeholder_chart.png" alt="Wykres z części badawczej" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
-                            <p class="text-muted mt-2 mb-0"><small>[Wykres / Chart placeholder]</small></p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="research-summary p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 8px; height: 100%;">
-                                <p class="mb-0"><i>[Tutaj wklej skrócone podsumowanie z części badawczej / Paste shortened research summary here]</i></p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="tech-card hide-card" id="methodology-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Cel i Metodologia badań" : "Goal and Research Methodology")
+            </h3>
+            <div class="tech-card-body">
+                <p style="text-indent: 1.5em; text-align: justify; margin-bottom: 1rem;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Głównym celem badawczym było sprawdzenie skuteczności zaproponowanego algorytmu hybrydowego w sterowaniu agentem w grze platformowej 2D. Środowiskiem testowym były zróżnicowane poziomy (od 0 do 3) o skalującym się stopniu trudności. Poziom początkowy był najkrótszy i najłatwiejszy, a każdy kolejny stawał się dłuższy, wprowadzając nowe, wymagające przeszkody (czarna materia, lawa, kolce, emiter lawy oraz poruszający się wilk)." : "The main research objective was to verify the effectiveness of the proposed hybrid algorithm in controlling an agent in a 2D platformer game. The test environment consisted of diverse levels (from 0 to 3) with a scaling difficulty level. The initial level was the shortest and easiest, with each subsequent level becoming longer and introducing new, challenging obstacles (dark matter, lava, spikes, lava emitter, and a moving wolf)."))
+                </p>
+                <p style="text-indent: 1.5em; text-align: justify; margin-bottom: 0;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Same testy polegały na sprawdzeniu, jaki wpływ posiada liczebność populacji na liczbę generacji potrzebnych do ukończenia poziomu. Każdy test dla poszczególnej populacji (16, 32, 64, 128, 256) był powtarzany 5 razy. Dodatkowo obserwowano, które miejsca na poszczególnych planszach były najbardziej problematyczne dla badanych agentów." : "The tests themselves involved checking the impact of the population size on the number of generations needed to complete a level. Each test for a specific population (16, 32, 64, 128, 256) was repeated 5 times. Additionally, observations were made regarding which areas on individual maps were the most problematic for the evaluated agents."))
+                </p>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="level0-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 0" : "Results - Level 0")
+            </h3>
+            <div class="tech-card-body">
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered hardware-table text-center align-middle" style="background-color: rgba(255,255,255,0.9);">
+                        <thead style="background-color: #184592; color: white;">
+                            <tr>
+                                <th>@(State.CurrentLanguage == "PL" ? "Populacja" : "Population")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba generacji" : "Avg. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba ruchów" : "Avg. moves")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Min. generacji" : "Min. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Max. generacji" : "Max. generations")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>16</td><td>8</td><td>17</td><td>4</td><td>10</td></tr>
+                            <tr><td>32</td><td>5</td><td>18</td><td>3</td><td>7</td></tr>
+                            <tr><td>64</td><td>6</td><td>19</td><td>2</td><td>9</td></tr>
+                            <tr><td>128</td><td>4</td><td>17</td><td>2</td><td>6</td></tr>
+                            <tr><td>256</td><td>3</td><td>18</td><td>2</td><td>4</td></tr>
+                        </tbody>
+                    </table>
                 </div>
+                <p style="text-indent: 1.5em; text-align: justify; margin-bottom: 0;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki pokazują, że średnia liczba ruchów najlepszego osobnika nie zależy od liczebności populacji. Wystarczą 2 do 4 generacji dla populacji liczącej 256 osobników, aby ukończyć poziom gry." : "The results show that the average number of moves of the best individual does not depend on the population size. It takes 2 to 4 generations for a population of 256 individuals to complete the level."))
+                </p>
+            </div>
+        </div>
 
+        <div class="tech-card hide-card" id="level1-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 1" : "Results - Level 1")
+            </h3>
+            <div class="tech-card-body">
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered hardware-table text-center align-middle" style="background-color: rgba(255,255,255,0.9);">
+                        <thead style="background-color: #184592; color: white;">
+                            <tr>
+                                <th>@(State.CurrentLanguage == "PL" ? "Populacja" : "Population")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba generacji" : "Avg. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba ruchów" : "Avg. moves")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Min. generacji" : "Min. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Max. generacji" : "Max. generations")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>16</td><td>13</td><td>26</td><td>9</td><td>21</td></tr>
+                            <tr><td>32</td><td>10</td><td>27</td><td>9</td><td>12</td></tr>
+                            <tr><td>64</td><td>11</td><td>24</td><td>7</td><td>14</td></tr>
+                            <tr><td>128</td><td>7</td><td>30</td><td>6</td><td>8</td></tr>
+                            <tr><td>256</td><td>5</td><td>31</td><td>5</td><td>6</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-indent: 1.5em; text-align: justify; margin-bottom: 0;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Wraz ze wzrostem populacji (na przykład z 16 do 256 agentów), średnia liczba generacji zazwyczaj maleje. Dla 16 agentów średnia liczba generacji wynosi 13, podczas gdy dla 256 agentów spada do 5. Sugeruje to, że większa liczba agentów przyspiesza rozwiązanie problemu." : "As the population increases (e.g., from 16 to 256 agents), the average number of generations typically decreases. For 16 agents, the average number of generations is 13, while for 256 agents it drops to 5. This suggests that a larger number of agents accelerates problem solving."))
+                </p>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="level2-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 2" : "Results - Level 2")
+            </h3>
+            <div class="tech-card-body">
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered hardware-table text-center align-middle" style="background-color: rgba(255,255,255,0.9);">
+                        <thead style="background-color: #184592; color: white;">
+                            <tr>
+                                <th>@(State.CurrentLanguage == "PL" ? "Populacja" : "Population")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba generacji" : "Avg. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba ruchów" : "Avg. moves")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Min. generacji" : "Min. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Max. generacji" : "Max. generations")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>16</td><td>13</td><td>29</td><td>9</td><td>18</td></tr>
+                            <tr><td>32</td><td>8</td><td>28</td><td>6</td><td>10</td></tr>
+                            <tr><td>64</td><td>9</td><td>30</td><td>6</td><td>13</td></tr>
+                            <tr><td>128</td><td>8</td><td>30</td><td>6</td><td>12</td></tr>
+                            <tr><td>256</td><td>6</td><td>28</td><td>5</td><td>8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-indent: 1.5em; text-align: justify; margin-bottom: 0;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki pokazują, że w tym przypadku liczebność populacji nie miała znaczącego wpływu na przejście poziomu gry. Świadczy o tym fakt, że różnice między średnią liczbą generacji dla populacji: 32, 64, 128, 256 były niewielkie." : "The results show that in this case the population size did not have a significant impact on completing the level. This is evidenced by the fact that the differences between the average number of generations for populations of 32, 64, 128, and 256 were minor."))
+                </p>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="level3-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Wyniki - Poziom 3" : "Results - Level 3")
+            </h3>
+            <div class="tech-card-body">
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered hardware-table text-center align-middle" style="background-color: rgba(255,255,255,0.9);">
+                        <thead style="background-color: #184592; color: white;">
+                            <tr>
+                                <th>@(State.CurrentLanguage == "PL" ? "Populacja" : "Population")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba generacji" : "Avg. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Średnia liczba ruchów" : "Avg. moves")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Min. generacji" : "Min. generations")</th>
+                                <th>@(State.CurrentLanguage == "PL" ? "Max. generacji" : "Max. generations")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>16</td><td>30</td><td>49</td><td>22</td><td>42</td></tr>
+                            <tr><td>32</td><td>21</td><td>47</td><td>17</td><td>28</td></tr>
+                            <tr><td>64</td><td>17</td><td>50</td><td>15</td><td>20</td></tr>
+                            <tr><td>128</td><td>9</td><td>49</td><td>7</td><td>12</td></tr>
+                            <tr><td>256</td><td>9</td><td>49</td><td>8</td><td>11</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-indent: 1.5em; text-align: justify; margin-bottom: 0;">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Wyniki pokazują, że mniejsze populacje (na przykład 16, 32, 64) potrzebowały stosunkowo dużej liczby generacji, aby przejść dany poziom w porównaniu do większych populacji." : "The results show that smaller populations (e.g., 16, 32, 64) needed a relatively large number of generations to complete a given level compared to larger populations."))
+                </p>
+            </div>
+        </div>
+
+        <div class="tech-card hide-card" id="summary-section">
+            <h3 class="tech-card-title">
+                @(State.CurrentLanguage == "PL" ? "Podsumowanie i wnioski" : "Summary and conclusions")
+            </h3>
+            <div class="tech-card-body">
+                <p style="text-indent: 1.5em; text-align: justify;" class="mb-2">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Najtrudniejszym oraz najdłuższym poziomem okazał się poziom 3, natomiast poziom 0 był najłatwiejszy. Z kolei poziomy 2 i 3 (powinno być: 1 i 2) posiadały podobny poziom trudności. Znacząca liczba przeszkód na danym terenie, szczególnie rozległe przepaście między platformami, zdecydowanie wydłużały czas przejścia." : "The most difficult and longest level turned out to be level 3, while level 0 was the easiest. Levels 1 and 2 had a similar difficulty level. A significant number of obstacles, especially wide gaps between platforms, drastically extended the completion time."))
+                </p>
+                <p style="text-indent: 1.5em; text-align: justify;" class="mb-2">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Liczebność populacji nie wpłynęła znacząco na docelową liczbę ruchów potrzebnych do ukończenia poziomu, jednak większe populacje były zdecydowanie bardziej efektywne (wymagały mniejszej liczby generacji do znalezienia optymalnej ścieżki). Znaczące różnice w efektywności zaczynały się od populacji rzędu 128 osobników i więcej." : "The population size did not significantly affect the target number of moves needed to complete the level, but larger populations were definitely more efficient (requiring fewer generations to find the optimal path). Significant differences in efficiency began from populations of 128 individuals and more."))
+                </p>
+                <p style="text-indent: 1.5em; text-align: justify;" class="mb-0">
+                    @((MarkupString)(State.CurrentLanguage == "PL" ? "Zastosowane podejście umożliwiło przechodzenie poziomów gry platformowej 2D, jednak algorytm nie jest uniwersalny (wymaga kalibracji pod konkretny poziom i nie reaguje w pełni na losowe zdarzenia). Gra stanowi solidną bazę do dalszego rozwoju, na przykład poprzez dodanie sieci neuronowych analizujących obraz." : "The applied approach enabled the completion of 2D platformer levels, but the algorithm is not universal (it requires calibration for a specific level and does not fully react to random events). The game constitutes a solid foundation for further development, such as adding neural networks that analyze the screen."))
+                </p>
             </div>
         </div>
     </ChildContent>
 </SharedLayout>
 
 @code {
-    private bool _showLongDescription = false;
+    private bool _showLongDescription = true;
 
     protected override void OnInitialized()
     {

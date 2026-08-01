@@ -161,7 +161,7 @@
                     </p>
 
                     <div class="methodology-block mb-5">
-                        <h4 style="color: #184592; font-weight: 700; margin-bottom: 20px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Stanowiska badawcze" : "Test Environments"))</h4>
+                        <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Stanowiska badawcze" : "Test Environments"))</h5>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" style="border-collapse: collapse; width: 100%;">
                                 <thead style="border-bottom: 2px solid #184592;">
@@ -228,7 +228,7 @@
                     </div>
 
                     <div class="methodology-block mb-5">
-                        <h4 style="color: #184592; font-weight: 700; margin-bottom: 20px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przygotowanie środowiska pomiarowego" : "Measurement Environment Preparation"))</h4>
+                        <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przygotowanie środowiska pomiarowego" : "Measurement Environment Preparation"))</h5>
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div>
@@ -256,7 +256,7 @@
                     </div>
 
                     <div class="methodology-block mb-2">
-                        <h4 style="color: #184592; font-weight: 700; margin-bottom: 20px;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg testów i pomiary:" : "Test Execution and Measurements:"))</h4>
+                        <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg testów i pomiary:" : "Test Execution and Measurements:"))</h5>
                         <div>
                             <p style=" margin-bottom: 15px; text-indent: 1.5em; text-align: justify;">@((MarkupString)(State.CurrentLanguage == "PL" ? "Pomiary odbywały się wyłącznie w skompilowanych, natywnych wersjach produkcyjnych projektów w celu wyeliminowania narzutu środowiska edytora (ang. editor overhead). Do zbierania telemetrii użyto programu MSI Afterburner z częstotliwością próbkowania 100 ms. Rejestrowano kluczowe metryki:" : "Measurements were conducted exclusively in compiled, native production builds to eliminate editor overhead. Telemetry data was collected using MSI Afterburner with a 100 ms polling rate. Key collected metrics:"))</p>
                             
@@ -599,7 +599,18 @@
                 
                 <div class="mb-5">
                     <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Płynność działania sceny 3D (FPS)" : "3D Scene Fluidity (FPS)"))</h5>
-                    <img src="/img/thesis/mapa_fps.png" alt="FPS Mapa" class="clickable-chart mb-3" style="width: 100%; max-width: 800px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto;" @onclick='() => State.OpenImageModal("/img/thesis/mapa_fps.png", "FPS Mapa")' />
+                    <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; min-height: 200px;" class="d-flex justify-content-center align-items-center mb-3">
+                        @if (!_isMapFpsLoaded)
+                        {
+                            <div class="spinner-border text-primary" role="status" style="position: absolute;">
+                                <span class="visually-hidden">Wczytywanie...</span>
+                            </div>
+                        }
+                        <img src="/img/thesis/mapa_fps.png" alt="FPS Mapa" class="clickable-chart" 
+                             style="width: 100%; object-fit: contain; border-radius: 8px; opacity: @(_isMapFpsLoaded ? 1 : 0); transition: opacity 0.3s;" 
+                             @onload="OnMapFpsLoaded"
+                             @onclick='() => State.OpenImageModal("/img/thesis/mapa_fps.png", "FPS Mapa")' />
+                    </div>
                     <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "W złożonym środowisku 3D z ukształtowaniem terenu i roślinnością różnice wydajnościowe uległy wyrównaniu. <strong>Unity</strong> oraz <strong>Unreal Engine</strong> uzyskały zbliżone, wysokie wartości klatek na sekundę na wydajniejszym stanowisku. <strong>Godot</strong> odnotował niższy poziom płynności w scenie o wysokim skomplikowaniu geometrii." : "In the complex 3D environment featuring terrain and vegetation, performance differences leveled out. <strong>Unity</strong> and <strong>Unreal Engine</strong> achieved comparable high framerates on high-end hardware. <strong>Godot</strong> recorded lower fluidity in scenes with high geometric complexity."))
                     </p>
@@ -698,8 +709,31 @@
                 <div class="mb-4">
                     <h5 class="gradient-text-title">@((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg kamery po waypointach w czasie" : "Camera progression along waypoints over time"))</h5>
                     <div class="videos-grid" style="grid-template-columns: 1fr 1fr;">
-                        <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png" alt="Frametime Mapa A" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png", "Frametime Mapa A")' />
-                        <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png" alt="Frametime Mapa B" class="clickable-chart mb-3" style="width: 100%; object-fit: contain; border-radius: 8px;" @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png", "Frametime Mapa B")' />
+                        <div style="position: relative; width: 100%; min-height: 200px;" class="d-flex justify-content-center align-items-center mb-3">
+                            @if (!_isMapFrametimeALoaded)
+                            {
+                                <div class="spinner-border text-primary" role="status" style="position: absolute;">
+                                    <span class="visually-hidden">Wczytywanie...</span>
+                                </div>
+                            }
+                            <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png" alt="Frametime Mapa A" class="clickable-chart" 
+                                 style="width: 100%; object-fit: contain; border-radius: 8px; opacity: @(_isMapFrametimeALoaded ? 1 : 0); transition: opacity 0.3s;" 
+                                 @onload="OnMapFrametimeALoaded"
+                                 @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_A_DX12_Vulkan.png", "Frametime Mapa A")' />
+                        </div>
+
+                        <div style="position: relative; width: 100%; min-height: 200px;" class="d-flex justify-content-center align-items-center mb-3">
+                            @if (!_isMapFrametimeBLoaded)
+                            {
+                                <div class="spinner-border text-primary" role="status" style="position: absolute;">
+                                    <span class="visually-hidden">Wczytywanie...</span>
+                                </div>
+                            }
+                            <img src="/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png" alt="Frametime Mapa B" class="clickable-chart" 
+                                 style="width: 100%; object-fit: contain; border-radius: 8px; opacity: @(_isMapFrametimeBLoaded ? 1 : 0); transition: opacity 0.3s;" 
+                                 @onload="OnMapFrametimeBLoaded"
+                                 @onclick='() => State.OpenImageModal("/img/thesis/frametime_2x1_Mapa_Stanowisko_B_DX12_Vulkan.png", "Frametime Mapa B")' />
+                        </div>
                     </div>
                     <p style="margin-top: 15px; margin-bottom: 0; color: #334155; line-height: 1.6; text-indent: 1.5em; text-align: justify;">
                         @((MarkupString)(State.CurrentLanguage == "PL" ? "Przebieg opóźnień podczas ruchu kamery wykazuje najniższą zmienność w silniku <strong>Unity</strong>, co świadczy o sprawnej optymalizacji buforowania geometrii i tekstur. Środowisko <strong>Unreal</strong> wykazało sporadyczne skoki opóźnień podczas doczytywania sektorów mapy, podczas gdy <strong>Godot</strong> utrzymywał szerszą wstęgę wahań czasów klatek." : "Latency progression during camera movement reveals the lowest variability in <strong>Unity</strong>, reflecting efficient geometry and texture streaming optimization. The <strong>Unreal</strong> environment displayed sporadic latency spikes during sector loading, while <strong>Godot</strong> maintained a wider frametime fluctuation band."))
@@ -733,6 +767,14 @@
     private bool _showLongDescAquarium = true;
     private bool _showLongDescFox = true;
     private bool _showLongDescMap = true;
+
+    private bool _isMapFpsLoaded = false;
+    private bool _isMapFrametimeALoaded = false;
+    private bool _isMapFrametimeBLoaded = false;
+
+    private void OnMapFpsLoaded() => _isMapFpsLoaded = true;
+    private void OnMapFrametimeALoaded() => _isMapFrametimeALoaded = true;
+    private void OnMapFrametimeBLoaded() => _isMapFrametimeBLoaded = true;
 
     private void ToggleDescriptionLength()
     {

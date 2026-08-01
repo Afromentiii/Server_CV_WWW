@@ -134,18 +134,18 @@
     {
         if (currentProject?.Technologies != null)
         {
-            <div class="technologies-list" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+            <div class="project-tech-section">
                 @foreach (var tech in currentProject.Technologies)
                 {
                     if (State.IconToImgPath.TryGetValue(tech, out var iconPath))
                     {
-                        <div class="shared-tech-badge" title="@tech">
+                        <span class="tech-badge" title="@tech">
                             <img src="@iconPath" alt="@tech" />
-                        </div>
+                        </span>
                     }
                     else
                     {
-                        <div class="shared-tech-badge">@tech</div>
+                        <span class="tech-badge">@tech</span>
                     }
                 }
             </div>
